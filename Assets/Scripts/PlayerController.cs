@@ -14,11 +14,13 @@ public class PlayerController : MonoBehaviour
         jump = new Vector3(0.0f, 6f, 0.0f)*rb.mass;
     }
 
-    void OnCollisionStay() {
-        isGrounded = true;
+    void OnCollisionStay(Collision collision) {
+        if (collision.collider is TerrainCollider)
+            isGrounded = true;
     }
-    void OnCollisionExit() {
-        isGrounded = false;
+    void OnCollisionExit(Collision collision) {
+        if (collision.collider is TerrainCollider)
+            isGrounded = false;
     }
 
     void FixedUpdate()
