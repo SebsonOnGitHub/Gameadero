@@ -4,37 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 jump;
-    private bool isGrounded;
-    public float speed;
-    Rigidbody rb;
+    public GameMaster gameMaster;
 
     void Start() {
-        rb = GetComponent<Rigidbody>();
-        jump = new Vector3(0.0f, 6f, 0.0f)*rb.mass;
     }
 
-    void OnCollisionStay(Collision collision) {
-        if (collision.collider is TerrainCollider)
-            isGrounded = true;
-    }
-    void OnCollisionExit(Collision collision) {
-        if (collision.collider is TerrainCollider)
-            isGrounded = false;
-    }
-
-    void FixedUpdate()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
-            rb.AddForce(jump, ForceMode.Impulse);
-            isGrounded = false;
+    void FixedUpdate() {
+        if (Input.GetKeyDown(KeyCode.V)) {
+            gameMaster.SwitchMode();
         }
+        else if ((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || gameMaster.currPlayer.spitting) {
+            if (Input.GetKey(KeyCode.C)) {
+                gameMaster.currPlayer.CreateCan();
+            }
+            else {
+                gameMaster.currPlayer.AdjustCan();
+            }
+        }
+        else if (Input.GetKey(KeyCode.W) ||
+                 Input.GetKey(KeyCode.A) ||
+                 Input.GetKey(KeyCode.S) ||
+                 Input.GetKey(KeyCode.D)) {
+            gameMaster.currPlayer.Move();
 
-        Vector3 movement = new Vector3(speed*moveHorizontal, 0, speed*moveVertical);
-
-        GetComponent<Rigidbody>().AddForce(movement);
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                gameMaster.currPlayer.Jump();
+            }
+        }
     }
+
 }

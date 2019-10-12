@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameMaster : MonoBehaviour
+{
+    public Player currPlayer;
+    public Player secondPlayer;
+
+    void Start() {
+        secondPlayer.rb.isKinematic = true;
+    }
+
+    void Update() {
+        
+    }
+    
+    public void SwitchMode() {
+        Vector3 tempPos = new Vector3(0, -1100, 0);
+        Vector3 currPos = currPlayer.transform.position;
+        Vector3 secondPos = secondPlayer.transform.position;
+        currPlayer.transform.position = tempPos;
+        secondPlayer.transform.position = currPos;
+        currPlayer.transform.position = secondPos;
+
+        Player tempPlayer = currPlayer;
+        currPlayer = secondPlayer;
+        secondPlayer = tempPlayer;
+
+        currPlayer.SetSize();
+        currPlayer.rb.isKinematic = false;
+        secondPlayer.rb.isKinematic = true;
+    }
+}

@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 106226097676039028}
   - component: {fileID: 106226097676039027}
   - component: {fileID: 106226097676039031}
-  - component: {fileID: 106226097676039032}
-  - component: {fileID: 106226097676039033}
+  - component: {fileID: 6457946483919051070}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &106226097676039032
+--- !u!114 &6457946483919051070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,19 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 106226097676039026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5339a7dee9ddbdc4a915c91ce5fa054b, type: 3}
+  m_Script: {fileID: 11500000, guid: fcd24af322910144094e4dfaf0a5e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 16
---- !u!114 &106226097676039033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106226097676039026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b0fa47d41523a9468467e82b21febd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  speed: 0
+  rb: {fileID: 0}
+  ballMode: 0
+  growthScalar: 0
+  weightScalar: 0

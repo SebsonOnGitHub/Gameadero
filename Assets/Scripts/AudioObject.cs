@@ -11,7 +11,7 @@ public class AudioObject : MonoBehaviour
         audioSource.clip = collectAudio;
     }
 
-    public void CollectCan(){
+    public void CollectCan() {
         audioSource.Play();
     }
 }
