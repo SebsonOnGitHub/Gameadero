@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     private float smallestMass;
 
     public bool emptying = false;
+    public bool creatingCan = false;
+    public bool fillingBowl = false;
+    public bool swimming = false;
     public static float trocaCollected;
     public float speed;
     public Rigidbody rb;

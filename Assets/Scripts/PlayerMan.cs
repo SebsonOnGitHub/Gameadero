@@ -7,21 +7,26 @@ public class PlayerMan : Player
     private Vector3 jumpVec;
     private bool isGrounded;
 
-    public override void Jump() {
-        jumpVec = new Vector3(0.0f, 12f, 0.0f) * rb.mass;
-        if (isGrounded) {
-            rb.AddForce(jumpVec, ForceMode.Impulse);
+    void FixedUpdate() {
+        if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f)) {
             isGrounded = false;
+        }
+        else {
+            isGrounded = true;
         }
     }
 
-    void OnCollisionStay(Collision collision) {
-        if (collision.collider is TerrainCollider)
-            isGrounded = true;
+    public override void Jump() {
+        jumpVec = new Vector3(0.0f, 2f, 0.0f);
+        if (isGrounded) {
+            rb.AddForce(jumpVec, ForceMode.Impulse);
+        }
     }
 
-    void OnCollisionExit(Collision collision) {
-        if (collision.collider is TerrainCollider)
-            isGrounded = false;
+    public void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Water") {
+            FindObjectOfType<GameMaster>().SwitchMode();
+            swimming = true;
+        }
     }
 }

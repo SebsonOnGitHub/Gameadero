@@ -12,14 +12,21 @@ public class PlayerBall : Player
 
     public float bowlReactDist = 4;
 
+    public void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Water") {
+            swimming = true;
+            rb.GetComponent<SphereCollider>().radius *= 0.1f;
+        }
+    }
+
     public void CollectCan(float size) {
         trocaCollected += size;
         SetSize();
     }
 
     public override void CreateCan() {
-        if (!emptying) {
-            emptying = true;
+        if (!creatingCan) {
+            creatingCan = true;
             spitSize = 0;
             beforeSpitTroca = trocaCollected;
             rb.isKinematic = true;
@@ -42,14 +49,14 @@ public class PlayerBall : Player
         spitCan.SetSize(spitSize);
         spitCan = null;
         rb.isKinematic = false;
-        emptying = false;
+        creatingCan = false;
     }
     
     public override Bowl BowlNearby() {
         List<Bowl> bowls = new List<Bowl>(FindObjectsOfType<Bowl>());
 
         foreach (Bowl bowl in bowls) {
-            if (Vector3.Distance(bowl.transform.position, transform.position) <= bowlReactDist && bowl.currFullness != bowl.maxFullness) {
+            if (Vector3.Distance(bowl.transform.position, transform.position) <= bowlReactDist && bowl.percentFullness < 1) {
                 return bowl;
             }
         }
@@ -65,20 +72,28 @@ public class PlayerBall : Player
             beforeSpitTroca = trocaCollected;
             rb.isKinematic = true;
         }
-        else if (trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness) {
+        else if (trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness && bowl.percentFullness < 1) {
             rb.isKinematic = false;
             spitSize += spitSpeed;
             trocaCollected -= spitSpeed;
             SetSize();
             bowl.SetFullness(beforeSpitBowlFullness + spitSize);
+
+            if (bowl.percentFullness == 1) {
+                rb.isKinematic = false;
+                emptying = false;
+            }
         }
     }
 
     public override void AdjustBowl(Bowl bowl) {
-        spitSize = Mathf.Ceil(spitSize);
-        trocaCollected = beforeSpitTroca - spitSize;
-        SetSize();
-        bowl.SetFullness(beforeSpitBowlFullness + spitSize);
+        if (bowl.percentFullness < 1) {
+            spitSize = Mathf.Ceil(spitSize);
+            trocaCollected = beforeSpitTroca - spitSize;
+            SetSize();
+            bowl.SetFullness(beforeSpitBowlFullness + spitSize);
+        }
+
         rb.isKinematic = false;
         emptying = false;
     }

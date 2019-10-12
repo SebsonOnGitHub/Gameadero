@@ -17,7 +17,7 @@ public class Collectable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         PlayerBall pBall = collision.collider.GetComponent<PlayerBall>();
-        if (pBall) {
+        if (pBall && !pBall.creatingCan) {
             audioObject.CollectCan();
             pBall.CollectCan(size);
             Destroy(gameObject);

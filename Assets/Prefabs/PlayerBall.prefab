@@ -123,11 +123,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptying: 0
-  speed: 7
+  creatingCan: 0
+  fillingBowl: 0
+  speed: 5
   rb: {fileID: 106226097676039031}
   ballMode: 0
   growthScalar: 0.2
-  weightScalar: 0.2
+  weightScalar: 0.05
   canPrefab: {fileID: 160178911268347958, guid: b13e43d884e2b544fa1efc4969c0efc1,
     type: 3}
   bowlReactDist: 4

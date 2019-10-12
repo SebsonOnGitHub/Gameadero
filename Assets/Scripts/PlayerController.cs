@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (Input.GetKeyDown(KeyCode.V)) {
+        if (Input.GetKeyDown(KeyCode.V) && !gameMaster.currPlayer.swimming) {
             gameMaster.SwitchMode();
         }
-        else if ((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || gameMaster.currPlayer.emptying) {
+        else if (Input.GetKeyUp(KeyCode.C)) {
+            gameMaster.currPlayer.fillingBowl = false;
+        }
+        else if ((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || gameMaster.currPlayer.emptying || gameMaster.currPlayer.creatingCan) {
             Bowl nearbyBowl = gameMaster.currPlayer.BowlNearby();
             if (nearbyBowl) {
                 if (Input.GetKey(KeyCode.C)) {
@@ -22,8 +25,9 @@ public class PlayerController : MonoBehaviour
                 else {
                     gameMaster.currPlayer.AdjustBowl(nearbyBowl);
                 }
+                gameMaster.currPlayer.fillingBowl = true;
             }
-            else {
+            else if (!gameMaster.currPlayer.fillingBowl) {
                 if (Input.GetKey(KeyCode.C)) {
                     gameMaster.currPlayer.CreateCan();
                 }
