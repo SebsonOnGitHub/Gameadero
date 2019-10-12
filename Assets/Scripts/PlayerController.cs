@@ -13,12 +13,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V)) {
             gameMaster.SwitchMode();
         }
-        else if ((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || gameMaster.currPlayer.spitting) {
-            if (Input.GetKey(KeyCode.C)) {
-                gameMaster.currPlayer.CreateCan();
+        else if ((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || gameMaster.currPlayer.emptying) {
+            Bowl nearbyBowl = gameMaster.currPlayer.BowlNearby();
+            if (nearbyBowl) {
+                if (Input.GetKey(KeyCode.C)) {
+                    gameMaster.currPlayer.FillBowl(nearbyBowl);
+                }
+                else {
+                    gameMaster.currPlayer.AdjustBowl(nearbyBowl);
+                }
             }
             else {
-                gameMaster.currPlayer.AdjustCan();
+                if (Input.GetKey(KeyCode.C)) {
+                    gameMaster.currPlayer.CreateCan();
+                }
+                else {
+                    gameMaster.currPlayer.AdjustCan();
+                }
             }
         }
         else if (Input.GetKey(KeyCode.W) ||
@@ -30,6 +41,9 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) {
                 gameMaster.currPlayer.Jump();
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.Space)) {
+            gameMaster.currPlayer.Jump();
         }
     }
 

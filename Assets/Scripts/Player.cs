@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private Vector3 smallestSize;
     private float smallestMass;
 
-    public bool spitting = false;
+    public bool emptying = false;
     public static float trocaCollected;
     public float speed;
     public Rigidbody rb;
@@ -37,7 +37,10 @@ public class Player : MonoBehaviour
         rb.mass = (trocaCollected * weightScalar) + smallestMass;
     }
 
-    public virtual void Jump() { }
-    public virtual void CreateCan() { }
-    public virtual void AdjustCan() { }
+    public virtual void Jump() {}
+    public virtual void CreateCan() {}
+    public virtual void AdjustCan() {}
+    public virtual Bowl BowlNearby() {return null;}
+    public virtual void FillBowl(Bowl bowl) {}
+    public virtual void AdjustBowl(Bowl bowl) { }
 }
