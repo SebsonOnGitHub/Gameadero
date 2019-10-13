@@ -17,10 +17,17 @@ public class Collectable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         PlayerBall pBall = collision.collider.GetComponent<PlayerBall>();
-        if (pBall && !pBall.creatingCan) {
+        if (pBall && !pBall.creatingCan && GetComponentInParent<Cap>() == null) {
             audioObject.CollectCan();
             pBall.CollectCan(size);
             Destroy(gameObject);
+        }
+
+        PlayerMan pMan = collision.collider.GetComponent<PlayerMan>();
+        if (pMan && GetComponentInParent<Cap>() != null) {
+            audioObject.CollectCap();
+            pMan.CollectCap();
+            Destroy(GetComponentInParent<Cap>().gameObject);
         }
     }
 

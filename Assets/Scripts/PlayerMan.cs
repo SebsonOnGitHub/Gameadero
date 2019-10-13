@@ -26,7 +26,10 @@ public class PlayerMan : Player
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Water") {
             FindObjectOfType<GameMaster>().SwitchMode();
-            swimming = true;
         }
+    }
+
+    public void CollectCap() {
+
     }
 }

@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.C)) {
             gameMaster.currPlayer.fillingBowl = false;
         }
-        else if ((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || gameMaster.currPlayer.emptying || gameMaster.currPlayer.creatingCan) {
+        else if (((Player.trocaCollected >= 1 && Input.GetKey(KeyCode.C)) || 
+                 gameMaster.currPlayer.emptying || 
+                 gameMaster.currPlayer.creatingCan) &&
+                 !gameMaster.currPlayer.swimming) {
             Bowl nearbyBowl = gameMaster.currPlayer.BowlNearby();
             if (nearbyBowl) {
                 if (Input.GetKey(KeyCode.C)) {

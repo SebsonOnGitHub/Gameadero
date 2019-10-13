@@ -9,27 +9,18 @@ public class PlayerBall : Player
     private Collectable spitCan;
     private float beforeSpitTroca;
     private float beforeSpitBowlFullness;
-    private float playerRadius = 0;
+    private Vector3 emptyingSpot;
 
     public float bowlReactDist = 4;
 
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Water") {
-            if (playerRadius == 0) {
-                playerRadius = rb.GetComponent<SphereCollider>().radius;
-            }
             swimming = true;
-            if (rb.GetComponent<SphereCollider>().radius == playerRadius) {
-                transform.position -= new Vector3(0, playerRadius - 0.1f, 0);
-                rb.GetComponent<SphereCollider>().radius = 0.1f;
-            }
         }
     }
     public void OnCollisionExit(Collision collision) {
         if (collision.gameObject.tag == "Water") {
             swimming = false;
-            transform.position += new Vector3(0, playerRadius - 0.1f, 0);
-            rb.GetComponent<SphereCollider>().radius = playerRadius;
         }
     }
 
@@ -44,6 +35,7 @@ public class PlayerBall : Player
             spitSize = 0;
             beforeSpitTroca = trocaCollected;
             rb.isKinematic = true;
+            emptyingSpot = transform.position;
             spitCan = Instantiate<Collectable>(canPrefab);
             spitCan.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (transform.localScale.z * 2));
         }
@@ -52,6 +44,7 @@ public class PlayerBall : Player
             spitSize += spitSpeed;
             trocaCollected -= spitSpeed;
             SetSize();
+            transform.position = new Vector3(emptyingSpot.x, transform.position.y, emptyingSpot.z);
             spitCan.SetSize(spitSize);
         }
     }

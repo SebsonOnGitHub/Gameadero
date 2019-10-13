@@ -8,10 +8,15 @@ public class AudioObject : MonoBehaviour
     public AudioSource audioSource;
 
     void Start() {
-        audioSource.clip = collectAudio;
     }
 
     public void CollectCan() {
+        audioSource.clip = collectAudio;
+        audioSource.Play();
+    }
+
+    public void CollectCap() {
+        audioSource.clip = collectAudio;
         audioSource.Play();
     }
 }
