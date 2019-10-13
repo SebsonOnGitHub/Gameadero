@@ -7,12 +7,15 @@ public class Player : MonoBehaviour
     private Vector3 smallestSize;
     private float smallestMass;
 
+    protected float currSpeed;
+    protected float swimmingSpeed;
+
     public bool emptying = false;
     public bool creatingCan = false;
     public bool fillingBowl = false;
     public bool swimming = false;
     public static float trocaCollected;
-    public float speed;
+    public float landSpeed;
     public Rigidbody rb;
     public bool ballMode;
     public float growthScalar;
@@ -24,13 +27,15 @@ public class Player : MonoBehaviour
         trocaCollected = 0;
         smallestSize = gameObject.transform.localScale;
         smallestMass = rb.mass;
+        currSpeed = landSpeed;
+        swimmingSpeed = currSpeed / 2;
     }
 
     public void Move() {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(speed * moveHorizontal, 0, speed * moveVertical);
+        Vector3 movement = new Vector3(currSpeed * moveHorizontal, 0, currSpeed * moveVertical);
         rb.AddForce(movement);
     }
 

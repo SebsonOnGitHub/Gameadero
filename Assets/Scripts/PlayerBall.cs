@@ -9,13 +9,27 @@ public class PlayerBall : Player
     private Collectable spitCan;
     private float beforeSpitTroca;
     private float beforeSpitBowlFullness;
+    private float playerRadius = 0;
 
     public float bowlReactDist = 4;
 
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Water") {
+            if (playerRadius == 0) {
+                playerRadius = rb.GetComponent<SphereCollider>().radius;
+            }
             swimming = true;
-            rb.GetComponent<SphereCollider>().radius *= 0.1f;
+            if (rb.GetComponent<SphereCollider>().radius == playerRadius) {
+                transform.position -= new Vector3(0, playerRadius - 0.1f, 0);
+                rb.GetComponent<SphereCollider>().radius = 0.1f;
+            }
+        }
+    }
+    public void OnCollisionExit(Collision collision) {
+        if (collision.gameObject.tag == "Water") {
+            swimming = false;
+            transform.position += new Vector3(0, playerRadius - 0.1f, 0);
+            rb.GetComponent<SphereCollider>().radius = playerRadius;
         }
     }
 

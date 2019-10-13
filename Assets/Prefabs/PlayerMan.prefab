@@ -125,7 +125,8 @@ MonoBehaviour:
   emptying: 0
   creatingCan: 0
   fillingBowl: 0
-  speed: 2
+  swimming: 0
+  landSpeed: 2
   rb: {fileID: 546360774519558897}
   ballMode: 0
   growthScalar: 0.2
