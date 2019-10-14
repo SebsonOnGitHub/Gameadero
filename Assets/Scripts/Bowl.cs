@@ -12,6 +12,7 @@ public class Bowl : MonoBehaviour
     public float currFullness = 0;
     public float percentFullness = 0;
     public GameObject trocaLiquid;
+    public GameObject RollCoursePrefab;
 
     private void Start() {
         liquidMaxPos = trocaLiquid.transform.position;
@@ -30,5 +31,14 @@ public class Bowl : MonoBehaviour
 
         float curveScale = Mathf.Pow(percentFullness, 0.1f);
         trocaLiquid.transform.localScale = new Vector3(liquidMaxScale.x * curveScale, liquidMaxScale.y, liquidMaxScale.z * curveScale);
+
+        if (percentFullness == 1) {
+          Filled();
+        }
     }
+
+    public void Filled() {
+        Instantiate(RollCoursePrefab, new Vector3(7, 0.9f, 20), transform.rotation, transform);
+    }
+
 }
