@@ -11,7 +11,7 @@ public class PlayerBall : Player
     private float beforeSpitBowlFullness;
     private Vector3 emptyingSpot;
 
-    public float bowlReactDist = 4;
+    public float bowlReachDist = 4;
 
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Water") {
@@ -63,7 +63,7 @@ public class PlayerBall : Player
         List<Bowl> bowls = new List<Bowl>(FindObjectsOfType<Bowl>());
 
         foreach (Bowl bowl in bowls) {
-            if (Vector3.Distance(bowl.transform.position, transform.position) <= bowlReactDist && bowl.percentFullness < 1) {
+            if (Vector3.Distance(bowl.transform.position, transform.position) <= bowlReachDist && bowl.percentFullness < 1) {
                 return bowl;
             }
         }

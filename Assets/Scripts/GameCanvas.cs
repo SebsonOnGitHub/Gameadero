@@ -7,13 +7,15 @@ using UnityEngine.UI;
 public class GameCanvas : MonoBehaviour
 {
     private Text trocaNumber;
-    private Text[] capsNumbers = new Text[2];
-    private int capCounter = 0;
+    private Text[] capsNumbers;
+    private int capCounter;
 
     public Text trocaText;
     public Text capText;
 
     void Start() {
+        capsNumbers = new Text[2];
+        capCounter = 0;
         trocaText.text = "";
         capText.text = "";
 

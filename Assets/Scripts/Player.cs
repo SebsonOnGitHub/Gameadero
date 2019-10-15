@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
 
     public static float trocaCollected;
     public static int capsCollected;
-    public bool emptying = false;
-    public bool creatingCan = false;
-    public bool fillingBowl = false;
-    public bool swimming = false;
+    public bool emptying;
+    public bool creatingCan;
+    public bool fillingBowl;
+    public bool swimming;
     public float landSpeed;
     public Rigidbody rb;
     public bool ballMode;
@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
         smallestMass = rb.mass;
         currSpeed = landSpeed;
         swimmingSpeed = currSpeed / 2;
+
+        emptying = false;
+        creatingCan = false;
+        fillingBowl = false;
+        swimming = false;
     }
 
     public void Move() {

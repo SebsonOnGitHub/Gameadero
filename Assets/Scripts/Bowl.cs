@@ -8,13 +8,16 @@ public class Bowl : MonoBehaviour
     private Vector3 liquidMinPos;
     private Vector3 liquidMaxScale;
 
-    public float maxFullness = 2;
-    public float currFullness = 0;
-    public float percentFullness = 0;
+    public float maxFullness;
+    public float currFullness;
+    public float percentFullness;
     public GameObject trocaLiquid;
     public GameObject RollCoursePrefab;
 
-    private void Start() {
+    void Start() {
+        maxFullness = 2;
+        currFullness = 0;
+        percentFullness = 0;
         liquidMaxPos = trocaLiquid.transform.position;
         liquidMinPos = new Vector3(trocaLiquid.transform.position.x, trocaLiquid.transform.position.y * 0.52f, trocaLiquid.transform.position.z);
         liquidMaxScale = trocaLiquid.transform.localScale;
