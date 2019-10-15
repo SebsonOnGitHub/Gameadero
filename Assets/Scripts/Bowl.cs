@@ -38,7 +38,11 @@ public class Bowl : MonoBehaviour
     }
 
     public void Filled() {
-        Instantiate(RollCoursePrefab, new Vector3(7, 0.9f, 20), transform.rotation, transform);
+        SpawnObject(RollCoursePrefab, new Vector3(7, 0.9f, 20), transform.rotation, transform);
+    }
+
+    public void SpawnObject(GameObject Object, Vector3 position, Quaternion rotation, Transform parent) {
+        Instantiate(Object, position, rotation, parent);
     }
 
 }

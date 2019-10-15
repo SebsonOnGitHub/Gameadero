@@ -10,11 +10,12 @@ public class Player : MonoBehaviour
     protected float currSpeed;
     protected float swimmingSpeed;
 
+    public static float trocaCollected;
+    public static int capsCollected;
     public bool emptying = false;
     public bool creatingCan = false;
     public bool fillingBowl = false;
     public bool swimming = false;
-    public static float trocaCollected;
     public float landSpeed;
     public Rigidbody rb;
     public bool ballMode;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     void Start() {
         rb = GetComponent<Rigidbody>();
         trocaCollected = 0;
+        capsCollected = 0;
         smallestSize = gameObject.transform.localScale;
         smallestMass = rb.mass;
         currSpeed = landSpeed;

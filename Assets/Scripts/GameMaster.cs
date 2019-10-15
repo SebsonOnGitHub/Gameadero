@@ -6,9 +6,11 @@ public class GameMaster : MonoBehaviour
 {
     public Player currPlayer;
     public Player secondPlayer;
+    public int capsInWorld;
 
     void Start() {
         secondPlayer.rb.isKinematic = true;
+        capsInWorld = new List<Cap>(FindObjectsOfType<Cap>()).Count;
     }
 
     void Update() {

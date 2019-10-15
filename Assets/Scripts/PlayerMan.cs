@@ -30,6 +30,7 @@ public class PlayerMan : Player
     }
 
     public void CollectCap() {
-
+        FindObjectOfType<GameMaster>().capsInWorld--;
+        capsCollected += 1;
     }
 }
