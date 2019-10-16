@@ -14,7 +14,6 @@ public class GameMaster : MonoBehaviour
 
     public void Init() {
         secondPlayer.rb.isKinematic = true;
-        capsInWorld = new List<Cap>(FindObjectsOfType<Cap>()).Count;
     }
 
     public void SwitchMode() {

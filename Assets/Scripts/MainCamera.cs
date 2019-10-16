@@ -13,7 +13,7 @@ public class MainCamera : MonoBehaviour
 
     public void Init() {
         gameMaster = FindObjectOfType<GameMaster>();
-        vecToPlayer = new Vector3(0, 6, -10);
+        vecToPlayer = new Vector3(0, 8, -13);
     }
 
     public void Update() {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gate : MonoBehaviour {
+    public GameObject doorText;
+    public GameObject doorCap;
     public GameObject doorLeft;
     public GameObject doorRight;
     public float unlockCount;
@@ -20,7 +22,11 @@ public class Gate : MonoBehaviour {
 
     public void Update() {
         PlayerNearby();
-        if (!locked) {
+
+        if (locked) {
+            doorText.GetComponent<TextMesh>().text = unlockCount.ToString();
+        }
+        else {
             KeepOpen();
         }
     }
@@ -38,6 +44,9 @@ public class Gate : MonoBehaviour {
         Vector3 openForce = new Vector3(0, 0, -100);
         doorLeft.GetComponent<Rigidbody>().AddRelativeForce(openForce, ForceMode.Impulse);
         doorRight.GetComponent<Rigidbody>().AddRelativeForce(openForce, ForceMode.Impulse);
+
+        Destroy(doorText);
+        Destroy(doorCap);
     }
 
     public void KeepOpen() {

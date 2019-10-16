@@ -8,7 +8,7 @@ public class Bowl : MonoBehaviour
     public float currFullness;
     public float percentFullness;
     public GameObject trocaLiquid;
-    public GameObject RollCoursePrefab;
+    public GameObject rollCoursePrefab;
 
     private Vector3 liquidMaxPos;
     private Vector3 liquidMinPos;
@@ -44,7 +44,7 @@ public class Bowl : MonoBehaviour
     }
 
     public void Filled() {
-        SpawnObject(RollCoursePrefab, new Vector3(7, 0.9f, 20), transform.rotation, transform);
+        SpawnObject(rollCoursePrefab, new Vector3(7, 0.9f, 20), transform.rotation, transform);
     }
 
     public void SpawnObject(GameObject Object, Vector3 position, Quaternion rotation, Transform parent) {
