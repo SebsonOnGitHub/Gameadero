@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class PlayerBall : Player
 {
+    public float bowlReachDist = 4;
+ 
     private float spitSize = 0;
     private float spitSpeed = 0.05f;
-    private Collectable spitCan;
+    private Can spitCan;
     private float beforeSpitTroca;
     private float beforeSpitBowlFullness;
-    private Vector3 emptyingSpot;
 
-    public float bowlReachDist = 4;
+    public void Start() {
+        Init();
+    }
+
+    public override void Init() {
+        base.Init();
+        bowlReachDist = 4;
+    }
 
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Water") {
@@ -35,8 +43,7 @@ public class PlayerBall : Player
             spitSize = 0;
             beforeSpitTroca = trocaCollected;
             rb.isKinematic = true;
-            emptyingSpot = transform.position;
-            spitCan = Instantiate<Collectable>(canPrefab);
+            spitCan = Instantiate<Can>(canPrefab);
             spitCan.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (transform.localScale.z * 2));
         }
         else if (trocaCollected >= spitSpeed) {
@@ -44,7 +51,7 @@ public class PlayerBall : Player
             spitSize += spitSpeed;
             trocaCollected -= spitSpeed;
             SetSize();
-            transform.position = new Vector3(emptyingSpot.x, transform.position.y, emptyingSpot.z);
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
             spitCan.SetSize(spitSize);
         }
     }
@@ -56,6 +63,7 @@ public class PlayerBall : Player
         spitCan.SetSize(spitSize);
         spitCan = null;
         rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.None;
         creatingCan = false;
     }
     

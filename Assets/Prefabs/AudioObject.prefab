@@ -140,5 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb4ac609e9b4fe4384715ae152b3e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectAudio: {fileID: 0}
+  canAudio: {fileID: 8300000, guid: a713902ffc4fcad45b17ac82c5fcfd47, type: 3}
+  capAudio: {fileID: 8300000, guid: a713902ffc4fcad45b17ac82c5fcfd47, type: 3}
   audioSource: {fileID: 9086914920702037877}

@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class GameCanvas : MonoBehaviour
 {
-    private Text trocaNumber;
-    private Text[] capsNumbers;
-    private int capCounter;
-
     public Text trocaText;
     public Text capText;
 
-    void Start() {
-        capsNumbers = new Text[2];
-        capCounter = 0;
+    private Text trocaNumber;
+    private Text[] capsNumbers = new Text[2];
+    private int capCounter = 0;
+    private int letterDist = 24;
+
+    public void Start() {
+        Init();
+    }
+
+    public void Init() {
         trocaText.text = "";
         capText.text = "";
 
@@ -23,7 +26,7 @@ public class GameCanvas : MonoBehaviour
         PrintRightToLeft(capText, "BOTTLE CAPS " + 0 + "/" + 0);
     }
 
-    void Update(){
+    public void Update(){
         int maxCaps = Player.capsCollected + FindObjectOfType<GameMaster>().capsInWorld;
 
         trocaNumber.text = Mathf.Floor(Player.trocaCollected).ToString();
@@ -42,7 +45,7 @@ public class GameCanvas : MonoBehaviour
             letter.transform.SetParent(transform, false);
 
             Vector3 oldPos = origin.transform.position;
-            Vector3 newPos = new Vector3(oldPos.x + (20 * i), oldPos.y, oldPos.z);
+            Vector3 newPos = new Vector3(oldPos.x + (letterDist * i), oldPos.y, oldPos.z);
 
             letter.text = printString[i].ToString();
             letter.color = trocaColors[i % 3];
@@ -77,7 +80,7 @@ public class GameCanvas : MonoBehaviour
             letter.transform.SetParent(transform, false);
 
             Vector3 oldPos = origin.transform.position;
-            Vector3 newPos = new Vector3(oldPos.x - (20 * i), oldPos.y, oldPos.z);
+            Vector3 newPos = new Vector3(oldPos.x - (letterDist * i), oldPos.y, oldPos.z);
 
             letter.text = printString[i].ToString();
             letter.color = trocaColors[(startingColor + i) % 3];

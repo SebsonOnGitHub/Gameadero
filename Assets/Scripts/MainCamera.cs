@@ -7,12 +7,16 @@ public class MainCamera : MonoBehaviour
     private GameMaster gameMaster;
     private Vector3 vecToPlayer;
 
-    void Start() {
-        gameMaster = FindObjectOfType<GameMaster>();
-        vecToPlayer = transform.position - gameMaster.currPlayer.transform.position;
+    public void Start() {
+        Init();
     }
 
-    void Update() {
+    public void Init() {
+        gameMaster = FindObjectOfType<GameMaster>();
+        vecToPlayer = new Vector3(0, 6, -10);
+    }
+
+    public void Update() {
         FollowPlayer();
     }
 

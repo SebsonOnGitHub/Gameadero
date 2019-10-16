@@ -7,7 +7,7 @@ public class PlayerMan : Player
     private Vector3 jumpVec;
     private bool isGrounded;
 
-    void FixedUpdate() {
+    public void FixedUpdate() {
         if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f)) {
             isGrounded = false;
         }

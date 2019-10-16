@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Vector3 smallestSize;
-    private float smallestMass;
-
-    protected float currSpeed;
-    protected float swimmingSpeed;
-
     public static float trocaCollected;
     public static int capsCollected;
     public bool emptying;
@@ -21,9 +15,19 @@ public class Player : MonoBehaviour
     public bool ballMode;
     public float growthScalar;
     public float weightScalar;
-    public Collectable canPrefab;
+    public Can canPrefab;
+
+    protected float currSpeed;
+    protected float swimmingSpeed;
+
+    private Vector3 smallestSize;
+    private float smallestMass;
 
     void Start() {
+        Init();
+    }
+
+    public virtual void Init() {
         rb = GetComponent<Rigidbody>();
         trocaCollected = 0;
         capsCollected = 0;

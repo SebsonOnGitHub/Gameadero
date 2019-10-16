@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class AudioObject : MonoBehaviour
 {
-    public AudioClip collectAudio;
+    public AudioClip canAudio;
+    public AudioClip capAudio;
     public AudioSource audioSource;
 
-    void Start() {
-    }
+    public void Collect(Collectable collectable) {
+        if (collectable is Can) {
+            audioSource.clip = canAudio;
+        }
+        else if (collectable is Cap) {
+            audioSource.clip = capAudio;
+        }
 
-    public void CollectCan() {
-        audioSource.clip = collectAudio;
-        audioSource.Play();
-    }
-
-    public void CollectCap() {
-        audioSource.clip = collectAudio;
         audioSource.Play();
     }
 }

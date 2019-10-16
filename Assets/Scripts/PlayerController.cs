@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameMaster gameMaster;
 
-    void FixedUpdate() {
+    public void FixedUpdate() {
         if (Input.GetKeyDown(KeyCode.V) && !gameMaster.currPlayer.swimming) {
             gameMaster.SwitchMode();
         }

@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cap : MonoBehaviour
+public class Cap : Collectable
 {
+    public void Update(){
+        transform.Rotate(Vector3.up, Space.World);
+    }
 
-    void Update(){
-        transform.Rotate(Vector3.up);
+    public void OnCollisionEnter(Collision collision) {
+        PlayerMan pMan = collision.collider.GetComponent<PlayerMan>();
+        if (pMan) {
+            audioObject.Collect(this);
+            pMan.CollectCap();
+            Destroy(gameObject);
+        }
     }
 }

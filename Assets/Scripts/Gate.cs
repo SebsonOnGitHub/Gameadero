@@ -2,30 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate : MonoBehaviour
-{
-    public GameObject door;
-
+public class Gate : MonoBehaviour {
+    public GameObject doorLeft;
+    public GameObject doorRight;
     public float unlockCount;
     public float gateReachDist;
 
-    void Start() {
-        gateReachDist = 5;
+    private bool locked;
+
+    public void Start() {
+        Init();
     }
 
-    void Update() {
+    public void Init() {
+        locked = true;
+    }
+
+    public void Update() {
         PlayerNearby();
+        if (!locked) {
+            KeepOpen();
+        }
     }
 
     public void PlayerNearby() {
         Player player = FindObjectOfType<GameMaster>().currPlayer;
-
-        if (Vector3.Distance(player.transform.position, transform.position) <= gateReachDist && unlockCount == Player.capsCollected) {
+        float dist = Vector3.Distance(player.transform.position, transform.position);
+        if (dist <= gateReachDist && Player.capsCollected >= unlockCount && locked) {
             Unlock();
         }
     }
 
     public void Unlock() {
-        Destroy(door);
+        locked = false;
+        Vector3 openForce = new Vector3(0, 0, -100);
+        doorLeft.GetComponent<Rigidbody>().AddRelativeForce(openForce, ForceMode.Impulse);
+        doorRight.GetComponent<Rigidbody>().AddRelativeForce(openForce, ForceMode.Impulse);
+    }
+
+    public void KeepOpen() {
+        Vector3 openForce = new Vector3(0, 0, -40);
+        doorLeft.GetComponent<Rigidbody>().AddRelativeForce(openForce);
+        doorRight.GetComponent<Rigidbody>().AddRelativeForce(openForce);
     }
 }

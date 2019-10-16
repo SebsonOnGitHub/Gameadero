@@ -8,15 +8,15 @@ public class GameMaster : MonoBehaviour
     public Player secondPlayer;
     public int capsInWorld;
 
-    void Start() {
+    public void Start() {
+        Init();
+    }
+
+    public void Init() {
         secondPlayer.rb.isKinematic = true;
         capsInWorld = new List<Cap>(FindObjectsOfType<Cap>()).Count;
     }
 
-    void Update() {
-        
-    }
-    
     public void SwitchMode() {
         Vector3 tempPos = new Vector3(0, -1100, 0);
         Vector3 currPos = currPlayer.transform.position;

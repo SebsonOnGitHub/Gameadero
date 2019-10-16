@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Bowl : MonoBehaviour
 {
-    private Vector3 liquidMaxPos;
-    private Vector3 liquidMinPos;
-    private Vector3 liquidMaxScale;
-
     public float maxFullness;
     public float currFullness;
     public float percentFullness;
     public GameObject trocaLiquid;
     public GameObject RollCoursePrefab;
 
-    void Start() {
-        maxFullness = 2;
+    private Vector3 liquidMaxPos;
+    private Vector3 liquidMinPos;
+    private Vector3 liquidMaxScale;
+
+    public void Start() {
+        Init();
+    }
+
+    public void Init() {
         currFullness = 0;
         percentFullness = 0;
         liquidMaxPos = trocaLiquid.transform.position;
