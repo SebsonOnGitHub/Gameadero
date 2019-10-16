@@ -207,6 +207,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 4355865091543079724, guid: 10919cc0a883e6a42b08e79158ca876f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4355865091543079726, guid: 10919cc0a883e6a42b08e79158ca876f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -265,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 7678400329573024071, guid: 10919cc0a883e6a42b08e79158ca876f,
         type: 3}
       propertyPath: unlockCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7678400329573024071, guid: 10919cc0a883e6a42b08e79158ca876f,
         type: 3}
@@ -1950,7 +1955,7 @@ PrefabInstance:
     - target: {fileID: 546360774519558896, guid: b02f3d00c54f6064fb1b9e02e603cda4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.98
+      value: -21.33
       objectReference: {fileID: 0}
     - target: {fileID: 546360774519558896, guid: b02f3d00c54f6064fb1b9e02e603cda4,
         type: 3}
@@ -2786,7 +2791,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950664724}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 3, z: -6.4}
+  m_LocalPosition: {x: 0, y: 2.875, z: -9.94}
   m_LocalScale: {x: 2, y: 2, z: 0.01}
   m_Children: []
   m_Father: {fileID: 369910218}
