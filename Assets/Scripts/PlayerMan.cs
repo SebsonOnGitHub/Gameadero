@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class PlayerMan : Player
 {
-    private Vector3 jumpVec;
+    public GameObject umbrellaPrefab;
+    public float umbrellaFloat;
+
+    private GameObject umbrella;
     private bool isGrounded;
 
-    public void FixedUpdate() {
+    public void Update() {
         if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f)) {
             isGrounded = false;
         }
         else {
             isGrounded = true;
         }
-    }
 
-    public override void Jump() {
-        jumpVec = new Vector3(0.0f, 2f, 0.0f);
-        if (isGrounded) {
-            rb.AddForce(jumpVec, ForceMode.Impulse);
+        if (umbrella && rb.velocity.y <= 0) {
+            rb.AddForce(new Vector3(0, (rb.mass * 0.1f) * umbrellaFloat, 0));
         }
     }
 
-    public void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Water") {
-            FindObjectOfType<GameMaster>().SwitchMode();
+    public void Jump() {
+        if (isGrounded) {
+            rb.AddForce(new Vector3(0, 2, 0), ForceMode.Impulse);
+        }
+    }
+
+    public void Glide() {
+        if (!umbrella && !isGrounded) {
+            Vector3 umbrellaPos = transform.position + new Vector3(0.4f, 0.4f, 0);
+            umbrella = Instantiate(umbrellaPrefab, umbrellaPos, umbrellaPrefab.transform.rotation, transform);
+        }
+        else if (!Input.GetKey(KeyCode.C) || isGrounded) {
+            Destroy(umbrella);
+            PlayerController.currState = PlayerController.State.NONE;
         }
     }
 

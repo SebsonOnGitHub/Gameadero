@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerBall : Player
 {
-    public float bowlReachDist = 4;
- 
+    public float bowlReachDist;
+    public Can canPrefab;
+
     private float spitSize = 0;
     private float spitSpeed = 0.05f;
     private Can spitCan;
@@ -21,53 +22,51 @@ public class PlayerBall : Player
         bowlReachDist = 4;
     }
 
-    public void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Water") {
-            swimming = true;
-        }
-    }
-    public void OnCollisionExit(Collision collision) {
-        if (collision.gameObject.tag == "Water") {
-            swimming = false;
-        }
-    }
-
     public void CollectCan(float size) {
         trocaCollected += size;
         SetSize();
     }
 
-    public override void CreateCan() {
-        if (!creatingCan) {
-            creatingCan = true;
+    public void InitCan() {
+        if (trocaCollected > 0) {
             spitSize = 0;
             beforeSpitTroca = trocaCollected;
-            rb.isKinematic = true;
-            spitCan = Instantiate<Can>(canPrefab);
-            spitCan.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (transform.localScale.z * 2));
-        }
-        else if (trocaCollected >= spitSpeed) {
-            rb.isKinematic = false;
-            spitSize += spitSpeed;
-            trocaCollected -= spitSpeed;
-            SetSize();
             rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-            spitCan.SetSize(spitSize);
+
+            Vector3 canOffset = new Vector3(0, 0, (transform.localScale.z * 2));
+            spitCan = Instantiate<Can>(canPrefab, transform.position + canOffset, canPrefab.transform.rotation);
+
+            PlayerController.currState = PlayerController.State.FILLING_CAN;
+        }
+        else {
+            PlayerController.currState = PlayerController.State.NONE;
         }
     }
 
-    public override void AdjustCan() {
+    public void FillCan() {
+        if (Input.GetKey(KeyCode.C) && trocaCollected >= spitSpeed) {
+            spitSize += spitSpeed;
+            trocaCollected -= spitSpeed;
+            SetSize();
+            spitCan.SetSize(spitSize);
+        }
+        else {
+            PlayerController.currState = PlayerController.State.ADJUSTING_CAN;
+        }
+    }
+
+    public void AdjustCan() {
         spitSize = Mathf.Ceil(spitSize);
         trocaCollected = beforeSpitTroca - spitSize;
         SetSize();
         spitCan.SetSize(spitSize);
         spitCan = null;
-        rb.isKinematic = false;
         rb.constraints = RigidbodyConstraints.None;
-        creatingCan = false;
+
+        PlayerController.currState = PlayerController.State.NONE;
     }
     
-    public override Bowl BowlNearby() {
+    public Bowl BowlNearby() {
         List<Bowl> bowls = new List<Bowl>(FindObjectsOfType<Bowl>());
 
         foreach (Bowl bowl in bowls) {
@@ -79,29 +78,37 @@ public class PlayerBall : Player
         return null; 
     }
 
-    public override void FillBowl(Bowl bowl) {
-        if (!emptying) {
-            emptying = true;
+    public void InitBowl(Bowl bowl) {
+        if (trocaCollected > 0) {
             spitSize = 0;
             beforeSpitBowlFullness = bowl.currFullness;
             beforeSpitTroca = trocaCollected;
-            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+
+            PlayerController.currState = PlayerController.State.FILLING_BOWL;
         }
-        else if (trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness && bowl.percentFullness < 1) {
-            rb.isKinematic = false;
+        else {
+            PlayerController.currState = PlayerController.State.NONE;
+        }
+    }
+
+    public void FillBowl(Bowl bowl) {
+        if (Input.GetKey(KeyCode.C) && bowl && trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness) {
             spitSize += spitSpeed;
             trocaCollected -= spitSpeed;
             SetSize();
             bowl.SetFullness(beforeSpitBowlFullness + spitSize);
-
-            if (bowl.percentFullness == 1) {
-                rb.isKinematic = false;
-                emptying = false;
-            }
+        }
+        else if (bowl) {
+            PlayerController.currState = PlayerController.State.ADJUSTING_BOWL;
+        }
+        else {
+            rb.constraints = RigidbodyConstraints.None;
+            PlayerController.currState = PlayerController.State.NONE;
         }
     }
 
-    public override void AdjustBowl(Bowl bowl) {
+    public void AdjustBowl(Bowl bowl) {
         if (bowl.percentFullness < 1) {
             spitSize = Mathf.Ceil(spitSize);
             trocaCollected = beforeSpitTroca - spitSize;
@@ -109,7 +116,7 @@ public class PlayerBall : Player
             bowl.SetFullness(beforeSpitBowlFullness + spitSize);
         }
 
-        rb.isKinematic = false;
-        emptying = false;
+        rb.constraints = RigidbodyConstraints.None;
+        PlayerController.currState = PlayerController.State.NONE;
     }
 }

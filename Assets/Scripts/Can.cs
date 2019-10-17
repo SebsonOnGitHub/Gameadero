@@ -17,7 +17,7 @@ public class Can : Collectable
 
     public void OnCollisionEnter(Collision collision) {
         PlayerBall pBall = collision.collider.GetComponent<PlayerBall>();
-        if (pBall && !pBall.creatingCan) {
+        if (pBall && PlayerController.currState != PlayerController.State.FILLING_CAN) {
             audioObject.Collect(this);
             pBall.CollectCan(size);
             Destroy(gameObject);

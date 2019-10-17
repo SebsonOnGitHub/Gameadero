@@ -6,16 +6,10 @@ public class Player : MonoBehaviour
 {
     public static float trocaCollected;
     public static int capsCollected;
-    public bool emptying;
-    public bool creatingCan;
-    public bool fillingBowl;
-    public bool swimming;
     public float landSpeed;
     public Rigidbody rb;
-    public bool ballMode;
     public float growthScalar;
     public float weightScalar;
-    public Can canPrefab;
 
     protected float currSpeed;
     protected float swimmingSpeed;
@@ -35,11 +29,6 @@ public class Player : MonoBehaviour
         smallestMass = rb.mass;
         currSpeed = landSpeed;
         swimmingSpeed = currSpeed / 2;
-
-        emptying = false;
-        creatingCan = false;
-        fillingBowl = false;
-        swimming = false;
     }
 
     public void Move() {
@@ -55,11 +44,4 @@ public class Player : MonoBehaviour
         gameObject.transform.localScale = new Vector3(newSize, newSize, newSize) + smallestSize;
         rb.mass = (trocaCollected * weightScalar) + smallestMass;
     }
-
-    public virtual void Jump() {}
-    public virtual void CreateCan() {}
-    public virtual void AdjustCan() {}
-    public virtual Bowl BowlNearby() {return null;}
-    public virtual void FillBowl(Bowl bowl) {}
-    public virtual void AdjustBowl(Bowl bowl) { }
 }
