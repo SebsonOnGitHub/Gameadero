@@ -22,6 +22,14 @@ public class PlayerBall : Player
         bowlReachDist = 4;
     }
 
+    new public void OnCollisionEnter(Collision collision) {
+        Respawning(collision);
+
+        if (collision.collider.CompareTag("Water")) {
+            transform.position += new Vector3(0, -1f, 0);
+        }
+    }
+
     public void CollectCan(float size) {
         trocaCollected += size;
         SetSize();
@@ -44,7 +52,7 @@ public class PlayerBall : Player
     }
 
     public void FillCan() {
-        if (Input.GetKey(KeyCode.C) && trocaCollected >= spitSpeed) {
+        if (Input.GetKey(PlayerController.keyAction) && trocaCollected >= spitSpeed) {
             spitSize += spitSpeed;
             trocaCollected -= spitSpeed;
             SetSize();
@@ -93,7 +101,7 @@ public class PlayerBall : Player
     }
 
     public void FillBowl(Bowl bowl) {
-        if (Input.GetKey(KeyCode.C) && bowl && trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness) {
+        if (Input.GetKey(PlayerController.keyAction) && bowl && trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness) {
             spitSize += spitSpeed;
             trocaCollected -= spitSpeed;
             SetSize();

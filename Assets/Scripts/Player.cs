@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public float growthScalar;
     public float weightScalar;
+    Vector3 respawnPos;
 
+    protected bool isGrounded;
     protected float currSpeed;
     protected float swimmingSpeed;
 
@@ -23,12 +25,43 @@ public class Player : MonoBehaviour
 
     public virtual void Init() {
         rb = GetComponent<Rigidbody>();
+        isGrounded = false;
         trocaCollected = 0;
         capsCollected = 0;
         smallestSize = gameObject.transform.localScale;
         smallestMass = rb.mass;
         currSpeed = landSpeed;
         swimmingSpeed = currSpeed / 2;
+    }
+
+    public void Update() {
+        isGrounded = IsGrounded();
+    }
+
+    public void OnCollisionEnter(Collision collision) {
+        Respawning(collision);
+    }
+
+    public void Respawning(Collision collision) {
+        if (collision.collider.CompareTag("Respawn")) {
+            respawnPos = transform.position;
+        }
+    }
+
+    public virtual bool IsGrounded() {
+        if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("DeathPlane")) {
+            transform.position = respawnPos;
+            rb.velocity = Vector3.zero;
+        }
     }
 
     public void Move() {

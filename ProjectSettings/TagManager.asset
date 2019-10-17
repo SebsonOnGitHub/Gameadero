@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fire
   - Water
+  - DeathPlane
   layers:
   - Default
   - TransparentFX

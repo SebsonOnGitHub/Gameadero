@@ -20,12 +20,12 @@ public class Scale : MonoBehaviour
         rightDown = false;
     }
 
-    public void OnCollisionEnter(Collision collision) {
-        if (collision.collider.gameObject == leftTrigger && !leftDown) {
+    public void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject == leftTrigger && !leftDown) {
             leftDown = true;
             rightDown = false;
         }
-        else if (collision.collider.gameObject == rightTrigger && !rightDown) {
+        else if (collider.gameObject == rightTrigger && !rightDown) {
             rightDown = true;
             leftDown = false;
             SpawnObject(capPrefab, new Vector3(-43, 3, -4), capPrefab.transform.rotation, transform);

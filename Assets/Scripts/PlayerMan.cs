@@ -8,16 +8,9 @@ public class PlayerMan : Player
     public float umbrellaFloat;
 
     private GameObject umbrella;
-    private bool isGrounded;
 
-    public void Update() {
-        if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f)) {
-            isGrounded = false;
-        }
-        else {
-            isGrounded = true;
-        }
-
+    new public void Update() {
+        isGrounded = IsGrounded();
         if (umbrella && rb.velocity.y <= 0) {
             rb.AddForce(new Vector3(0, (rb.mass * 0.1f) * umbrellaFloat, 0));
         }
@@ -34,7 +27,7 @@ public class PlayerMan : Player
             Vector3 umbrellaPos = transform.position + new Vector3(0.4f, 0.4f, 0);
             umbrella = Instantiate(umbrellaPrefab, umbrellaPos, umbrellaPrefab.transform.rotation, transform);
         }
-        else if (!Input.GetKey(KeyCode.C) || isGrounded) {
+        else if (!Input.GetKey(PlayerController.keyAction) || isGrounded) {
             Destroy(umbrella);
             PlayerController.currState = PlayerController.State.NONE;
         }

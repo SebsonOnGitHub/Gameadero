@@ -6,6 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     public enum State { NONE, SWITCHING, GLIDING, INIT_BOWL, FILLING_BOWL, ADJUSTING_BOWL, INIT_CAN, FILLING_CAN, ADJUSTING_CAN };
     public static State currState;
+
+    public static KeyCode keyUp = KeyCode.W;
+    public static KeyCode keyDown = KeyCode.S;
+    public static KeyCode keyLeft = KeyCode.A;
+    public static KeyCode keyRight = KeyCode.D;
+    public static KeyCode keySwitch = KeyCode.V;
+    public static KeyCode keyAction = KeyCode.C;
+    public static KeyCode keyJump = KeyCode.Space;
+
     public GameMaster gameMaster;
 
     public void Start() {
@@ -60,25 +69,25 @@ public class PlayerController : MonoBehaviour
         bool isMan = gameMaster.currPlayer.GetComponent<PlayerMan>();
 
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(keyUp) || Input.GetKey(keyDown) || Input.GetKey(keyLeft) || Input.GetKey(keyRight)) {
             gameMaster.currPlayer.Move();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isMan) {
+        if (Input.GetKeyDown(keyJump) && isMan) {
             gameMaster.currPlayer.GetComponent<PlayerMan>().Jump();
         }
 
         if (currState == State.NONE) { 
-            if (Input.GetKeyDown(KeyCode.V)) {
+            if (Input.GetKeyDown(keySwitch)) {
                 return State.SWITCHING;
             }
-            else if (Input.GetKeyDown(KeyCode.C) && isMan) {
+            else if (Input.GetKeyDown(keyAction) && isMan) {
                 return State.GLIDING;
             }
-            else if (Input.GetKeyDown(KeyCode.C) && gameMaster.currPlayer.GetComponent<PlayerBall>().BowlNearby()) {
+            else if (Input.GetKeyDown(keyAction) && gameMaster.currPlayer.GetComponent<PlayerBall>().BowlNearby()) {
                 return State.INIT_BOWL;
             }
-            else if (Input.GetKeyDown(KeyCode.C)) {
+            else if (Input.GetKeyDown(keyAction)) {
                 return State.INIT_CAN;
             }
         }
