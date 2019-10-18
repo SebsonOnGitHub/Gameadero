@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    private GameMaster gameMaster;
     private Vector3 vecToPlayer;
+    public Vector3 wantedPos;
 
     public void Start() {
         Init();
     }
 
     public void Init() {
-        gameMaster = FindObjectOfType<GameMaster>();
         vecToPlayer = new Vector3(0, 8, -13);
+        transform.position = FindObjectOfType<GameMaster>().currPlayer.transform.position + vecToPlayer;
     }
 
     public void Update() {
-        FollowPlayer();
+        UpdateWantedPos();
+        if (!InPlace()) {
+            transform.position = Vector3.MoveTowards(transform.position, wantedPos, 0.6f);
+        }
     }
 
-    public void FollowPlayer() {
-        transform.position = gameMaster.currPlayer.transform.position + vecToPlayer;
+    public void UpdateWantedPos() {
+        wantedPos = FindObjectOfType<GameMaster>().currPlayer.transform.position + vecToPlayer;
+    }
+
+    public bool InPlace() {
+        return transform.position == wantedPos;
     }
 }

@@ -24,6 +24,18 @@ public class Can : Collectable
         }
     }
 
+    public void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("DeathPlane") && PlayerController.currState != PlayerController.State.FILLING_CAN) {
+            PlayerBall pBall = FindObjectOfType<PlayerBall>();
+            audioObject.Collect(this);
+            pBall.CollectCan(size);
+            pBall.SetSize();
+            FindObjectOfType<PlayerMan>().SetSize();
+
+            Destroy(gameObject);
+        }
+    }
+
     public void SetSize(float canSize) {
         size = canSize;
         Vector3 newSize = size * smallestSize;

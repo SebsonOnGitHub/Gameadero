@@ -1,0 +1,13 @@
+https://ozh.github.io/ascii-tables/
+
++-------------+----------------------+-----------------+
+| Interaction |         Ball         |       Man       |
++-------------+----------------------+-----------------+
+| Environment | Rolls fast           | Jumps           |
+| Can         | Pick up / create     | Use as platform |
+| Cap         | N/A                  | Picks up        |
+| Bowl        | Fills                | N/A             |
+| Gap         | Rolls over           | Glide over      |
+| Scale       | Weigh down with can  | N/A             |
+| Water       | Sinks                | Swims           |
++-------------+----------------------+-----------------+

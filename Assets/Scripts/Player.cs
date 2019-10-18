@@ -10,12 +10,14 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public float growthScalar;
     public float weightScalar;
-    Vector3 respawnPos;
+    public bool respawning;
 
     protected bool isGrounded;
     protected float currSpeed;
     protected float swimmingSpeed;
 
+    private Vector3 respawnPos;
+    private Quaternion respawnRot;
     private Vector3 smallestSize;
     private float smallestMass;
 
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
 
     public virtual void Init() {
         rb = GetComponent<Rigidbody>();
+        respawning = false;
         isGrounded = false;
         trocaCollected = 0;
         capsCollected = 0;
@@ -36,6 +39,17 @@ public class Player : MonoBehaviour
 
     public void Update() {
         isGrounded = IsGrounded();
+
+        if (FindObjectOfType<MainCamera>().InPlace()) {
+            respawning = false;
+        }
+
+        if (respawning) {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        else {
+            rb.constraints = RigidbodyConstraints.None;
+        }
     }
 
     public void OnCollisionEnter(Collision collision) {
@@ -45,6 +59,7 @@ public class Player : MonoBehaviour
     public void Respawning(Collision collision) {
         if (collision.collider.CompareTag("Respawn")) {
             respawnPos = transform.position;
+            respawnRot = transform.rotation;
         }
     }
 
@@ -59,7 +74,9 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) {
         if (other.CompareTag("DeathPlane")) {
+            respawning = true;
             transform.position = respawnPos;
+            transform.rotation = respawnRot;
             rb.velocity = Vector3.zero;
         }
     }

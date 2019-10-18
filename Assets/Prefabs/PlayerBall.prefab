@@ -122,15 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd24af322910144094e4dfaf0a5e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptying: 0
-  creatingCan: 0
-  fillingBowl: 0
-  swimming: 0
-  landSpeed: 5
+  landSpeed: 4
   rb: {fileID: 106226097676039031}
-  ballMode: 0
   growthScalar: 0.2
   weightScalar: 0.05
-  canPrefab: {fileID: 160178911268347958, guid: b13e43d884e2b544fa1efc4969c0efc1,
+  respawning: 0
+  bowlReachDist: 0
+  canPrefab: {fileID: 8515074769513656475, guid: b13e43d884e2b544fa1efc4969c0efc1,
     type: 3}
-  bowlReactDist: 4

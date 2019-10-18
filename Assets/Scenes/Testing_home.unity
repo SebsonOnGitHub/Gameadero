@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 3381924621965047824, guid: b13e43d884e2b544fa1efc4969c0efc1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.43
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 3381924621965047824, guid: b13e43d884e2b544fa1efc4969c0efc1,
         type: 3}
@@ -906,17 +906,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBall
       objectReference: {fileID: 0}
-    - target: {fileID: 6457946483919051070, guid: b17eec2c0dcc44046948dc01a860e53f,
-        type: 3}
-      propertyPath: growthScalar
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457946483919051070, guid: b17eec2c0dcc44046948dc01a860e53f,
-        type: 3}
-      propertyPath: canPrefab
-      value: 
-      objectReference: {fileID: 8515074769513656475, guid: b13e43d884e2b544fa1efc4969c0efc1,
-        type: 3}
     - target: {fileID: 106226097676039030, guid: b17eec2c0dcc44046948dc01a860e53f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2009,7 +1998,7 @@ PrefabInstance:
     - target: {fileID: 546360774519558896, guid: b02f3d00c54f6064fb1b9e02e603cda4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.81
+      value: -10.95
       objectReference: {fileID: 0}
     - target: {fileID: 546360774519558896, guid: b02f3d00c54f6064fb1b9e02e603cda4,
         type: 3}
