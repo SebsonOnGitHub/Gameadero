@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private Quaternion respawnRot;
     private Vector3 smallestSize;
     private float smallestMass;
+    private Vector3 forward;
 
     void Start() {
         Init();
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         smallestMass = rb.mass;
         currSpeed = landSpeed;
         swimmingSpeed = currSpeed / 2;
+        forward = new Vector3(0, 0, 1);
     }
 
     public void Update() {

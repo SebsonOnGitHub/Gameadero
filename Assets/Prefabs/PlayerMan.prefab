@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1891971430194950189}
   m_Layer: 0
   m_Name: PlayerMan
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,14 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20a778d55b56be44a396f7c6850f97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptying: 0
-  creatingCan: 0
-  fillingBowl: 0
-  swimming: 0
   landSpeed: 2
   rb: {fileID: 546360774519558897}
-  ballMode: 0
   growthScalar: 0.2
   weightScalar: 0.05
-  canPrefab: {fileID: 160178911268347958, guid: b13e43d884e2b544fa1efc4969c0efc1,
-    type: 3}
+  respawning: 0
+  umbrellaPrefab: {fileID: 0}
+  umbrellaFloat: 0

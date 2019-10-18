@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    private Vector3 vecToPlayer;
     public Vector3 wantedPos;
+    public Quaternion rotation;
+
+    private Vector3 vecToPlayer;
 
     public void Start() {
         Init();
@@ -13,6 +15,10 @@ public class MainCamera : MonoBehaviour
 
     public void Init() {
         vecToPlayer = new Vector3(0, 8, -13);
+        transform.Rotate(0, 0, 0, Space.World);
+        //vecToPlayer = new Vector3(13, 8, 0);
+        //transform.Rotate(0, -90, 0, Space.World);
+        rotation = transform.rotation;
         transform.position = FindObjectOfType<GameMaster>().currPlayer.transform.position + vecToPlayer;
     }
 

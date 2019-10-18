@@ -13,23 +13,6 @@ public class PlayerBall : Player
     private float beforeSpitTroca;
     private float beforeSpitBowlFullness;
 
-    public void Start() {
-        Init();
-    }
-
-    public override void Init() {
-        base.Init();
-        bowlReachDist = 4;
-    }
-
-    new public void OnCollisionEnter(Collision collision) {
-        Respawning(collision);
-
-        if (collision.collider.CompareTag("Water")) {
-            transform.position += new Vector3(0, -1f, 0);
-        }
-    }
-
     public void CollectCan(float size) {
         trocaCollected += size;
         SetSize();
@@ -73,7 +56,7 @@ public class PlayerBall : Player
 
         PlayerController.currState = PlayerController.State.NONE;
     }
-    
+
     public Bowl BowlNearby() {
         List<Bowl> bowls = new List<Bowl>(FindObjectsOfType<Bowl>());
 
@@ -83,7 +66,7 @@ public class PlayerBall : Player
             }
         }
 
-        return null; 
+        return null;
     }
 
     public void InitBowl(Bowl bowl) {

@@ -37,10 +37,7 @@ public class GameCanvas : MonoBehaviour
         capList = PrintRightToLeft(capText, "BOTTLE CAPS " + 0 + "/" + 0);
 
         PrintLeftToRight(jumpText, "JUMP: " + PlayerController.keyJump.ToString().ToUpper());
-        PrintLeftToRight(moveText, "MOVE: " + PlayerController.keyUp.ToString() + 
-                                   "," + PlayerController.keyLeft.ToString() + 
-                                   "," + PlayerController.keyDown.ToString() +
-                                   "," + PlayerController.keyRight.ToString());
+        PrintLeftToRight(moveText, "MOVE: " + PlayerController.keyUp.ToString() + PlayerController.keyLeft.ToString() + PlayerController.keyDown.ToString() + PlayerController.keyRight.ToString());
 
         if (FindObjectOfType<GameMaster>().currPlayer.GetComponent<PlayerMan>()) {
             actionList = PrintRightToLeft(actionText, "GLIDE: " + PlayerController.keyAction.ToString());

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Water
   - DeathPlane
+  - PlayerMan
+  - PlayerBall
   layers:
   - Default
   - TransparentFX
