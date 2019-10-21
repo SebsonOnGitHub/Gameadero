@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum State { NONE, SWITCHING, GLIDING, INIT_BOWL, FILLING_BOWL, ADJUSTING_BOWL, INIT_CAN, FILLING_CAN, ADJUSTING_CAN };
+    public enum State { NONE, SWITCHING, SWIMMING, FLOATING, GLIDING, INIT_BOWL, FILLING_BOWL, ADJUSTING_BOWL, INIT_CAN, FILLING_CAN, ADJUSTING_CAN };
     public static State currState;
 
     public static KeyCode keyUp = KeyCode.W;
@@ -69,12 +69,28 @@ public class PlayerController : MonoBehaviour
         bool isMan = gameMaster.currPlayer.GetComponent<PlayerMan>();
 
 
-        if (Input.GetKey(keyUp) || Input.GetKey(keyDown) || Input.GetKey(keyLeft) || Input.GetKey(keyRight)) {
-            gameMaster.currPlayer.Move();
+        if (Input.GetKey(keyUp)) {
+            gameMaster.currPlayer.Move(1);
+        }
+
+        if (Input.GetKey(keyLeft)) {
+            gameMaster.currPlayer.Turn(-1);
+        }
+
+        if (Input.GetKey(keyRight)) {
+            gameMaster.currPlayer.Turn(1);
+        }
+
+        if (Input.GetKey(keyDown)) {
+            gameMaster.currPlayer.Move(-1);
         }
 
         if (Input.GetKeyDown(keyJump) && isMan) {
-            gameMaster.currPlayer.GetComponent<PlayerMan>().Jump();
+            gameMaster.currPlayer.GetComponent<PlayerMan>().Jump(false);
+        }
+
+        if (Input.GetKey(keyJump) && isMan) {
+            gameMaster.currPlayer.GetComponent<PlayerMan>().Jump(true);
         }
 
         if (currState == State.NONE) { 

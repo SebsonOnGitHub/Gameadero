@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour
     }
 
     public void Init() {
+        Physics.gravity = new Vector3(0, -23F, 0);
         secondPlayer.rb.isKinematic = true;
     }
 
@@ -31,6 +32,7 @@ public class GameMaster : MonoBehaviour
         currPlayer.SetSize();
         currPlayer.rb.isKinematic = false;
         secondPlayer.rb.isKinematic = true;
+
         PlayerController.currState = PlayerController.State.NONE;
     }
 }

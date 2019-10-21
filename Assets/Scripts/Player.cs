@@ -11,16 +11,20 @@ public class Player : MonoBehaviour
     public float growthScalar;
     public float weightScalar;
     public bool respawning;
+    public float currSpeed;
+    public List<int> standingOn = new List<int>();
 
-    protected bool isGrounded;
-    protected float currSpeed;
-    protected float swimmingSpeed;
+    protected float waterSpeed;
+    protected float currRotateSpeed;
+    protected Vector3 respawnPos;
+    protected bool isGrounded = false;
+    protected bool isSwimming = false;
+    protected List<int> swimmingIn = new List<int>();
+    protected List<int> onCourseBars = new List<int>();
 
-    private Vector3 respawnPos;
-    private Quaternion respawnRot;
     private Vector3 smallestSize;
     private float smallestMass;
-    private Vector3 forward;
+
 
     void Start() {
         Init();
@@ -29,67 +33,138 @@ public class Player : MonoBehaviour
     public virtual void Init() {
         rb = GetComponent<Rigidbody>();
         respawning = false;
-        isGrounded = false;
         trocaCollected = 0;
         capsCollected = 0;
         smallestSize = gameObject.transform.localScale;
         smallestMass = rb.mass;
         currSpeed = landSpeed;
-        swimmingSpeed = currSpeed / 2;
-        forward = new Vector3(0, 0, 1);
+        waterSpeed = 0.6f * landSpeed;
+        currRotateSpeed = 1.6f;
     }
 
     public void Update() {
-        isGrounded = IsGrounded();
+        UpdatingPlayer();
+    }
 
+    public virtual void UpdatingPlayer() {
         if (FindObjectOfType<MainCamera>().InPlace()) {
             respawning = false;
+        }
+
+        if (onCourseBars.Count < 2 && GetComponent<PlayerBall>()) {
+            currSpeed = landSpeed;
+        }
+        else if (onCourseBars.Count == 2 && GetComponent<PlayerBall>()) {
+            currSpeed = 10;
+        }
+
+        if (swimmingIn.Count > 0) {
+            isSwimming = true;
+        }
+        else {
+            isSwimming = false;
+        }
+
+        if (standingOn.Count > 0) {
+            isGrounded = true;
+        }
+        else {
+            isGrounded = false;
         }
 
         if (respawning) {
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
-        else {
-            rb.constraints = RigidbodyConstraints.None;
+        else if (rb.constraints == RigidbodyConstraints.FreezeAll) {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
-    public void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision) {
         Respawning(collision);
+        OnCourse(collision);
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        if (collision.collider.CompareTag("CourseBar")) {
+            onCourseBars.Remove(collision.collider.GetInstanceID());
+        }
+
+        if (onCourseBars.Count < 2 && GetComponent<PlayerBall>()) {
+            currSpeed = landSpeed;
+        }
     }
 
     public void Respawning(Collision collision) {
         if (collision.collider.CompareTag("Respawn")) {
             respawnPos = transform.position;
-            respawnRot = transform.rotation;
         }
     }
 
-    public virtual bool IsGrounded() {
-        if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f)) {
-            return false;
+    public void OnCourse(Collision collision) {
+        if (collision.collider.CompareTag("CourseBar")) {
+            onCourseBars.Add(collision.collider.GetInstanceID());
         }
-        else {
-            return true;
+
+        if (onCourseBars.Count > 0 && GetComponent<PlayerMan>()) {
+            transform.position = transform.position - new Vector3(0, 1.5f, 0);
         }
     }
 
     public void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Water")) {
+            swimmingIn.Add(other.GetInstanceID());
+            if (swimmingIn.Count > 0) {
+                currSpeed = waterSpeed;
+            }
+        }
+
         if (other.CompareTag("DeathPlane")) {
             respawning = true;
             transform.position = respawnPos;
-            transform.rotation = respawnRot;
             rb.velocity = Vector3.zero;
+        }
+        else if (!other.isTrigger && !other.CompareTag("PlayerMan") && !other.CompareTag("PlayerBall")) {
+            standingOn.Add(other.GetInstanceID());
+            if (standingOn.Count > 0) {
+                isGrounded = true;
+            }
         }
     }
 
-    public void Move() {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Water")) {
+            swimmingIn.Remove(other.GetInstanceID());
+            if (swimmingIn.Count == 0) {
+                currSpeed = landSpeed;
+            }
+        }
 
-        Vector3 movement = new Vector3(currSpeed * moveHorizontal, 0, currSpeed * moveVertical);
-        rb.AddForce(movement);
+        if (!other.isTrigger && standingOn.Contains(other.GetInstanceID())) {
+            standingOn.Remove(other.GetInstanceID());
+            if (standingOn.Count == 0) {
+                isGrounded = false;
+            }
+        }
     }
+
+    public void Move(int dir) {
+        Vector3 moveForce = dir * FindObjectOfType<MainCamera>().forwardVec * currSpeed;
+
+        if (isGrounded) {
+            rb.AddForce(moveForce * 2.8f);
+        }
+        else {
+            rb.AddForce(moveForce);
+        }
+    }
+
+    public void Turn(int rot) {
+        FindObjectOfType<PlayerMan>().transform.Rotate(new Vector3(0, rot * currRotateSpeed * 2, 0), Space.Self);
+        FindObjectOfType<PlayerBall>().transform.Rotate(new Vector3(0, rot * currRotateSpeed * 2, 0), Space.Self);
+        FindObjectOfType<MainCamera>().RotateAroundPlayer(rot * currRotateSpeed);
+    }
+
 
     public void SetSize() {
         float newSize = trocaCollected * growthScalar;

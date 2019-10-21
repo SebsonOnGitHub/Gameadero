@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 632597886636409800}
   - component: {fileID: 5939951649501968433}
   - component: {fileID: 8515074769513656475}
+  - component: {fileID: 4152525615257857651}
   m_Layer: 0
   m_Name: TrocaCan
   m_TagString: Untagged
@@ -158,6 +159,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioObject: {fileID: 0}
+--- !u!136 &4152525615257857651
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780148213794818563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 70
+  m_Height: 250
+  m_Direction: 1
+  m_Center: {x: 0, y: 95, z: 0}
 --- !u!1 &3906739506510242246
 GameObject:
   m_ObjectHideFlags: 0

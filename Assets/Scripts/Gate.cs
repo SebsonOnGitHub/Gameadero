@@ -25,9 +25,10 @@ public class Gate : MonoBehaviour {
 
         if (locked) {
             doorText.GetComponent<TextMesh>().text = unlockCount.ToString();
+            ForceDoors(40);
         }
         else {
-            KeepOpen();
+            ForceDoors(-40);
         }
     }
 
@@ -49,8 +50,8 @@ public class Gate : MonoBehaviour {
         Destroy(doorCap);
     }
 
-    public void KeepOpen() {
-        Vector3 openForce = new Vector3(0, 0, -40);
+    public void ForceDoors(int force) {
+        Vector3 openForce = new Vector3(0, 0, force);
         doorLeft.GetComponent<Rigidbody>().AddRelativeForce(openForce);
         doorRight.GetComponent<Rigidbody>().AddRelativeForce(openForce);
     }

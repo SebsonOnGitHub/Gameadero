@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355469330468307807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.95, z: 7.5}
+  m_LocalPosition: {x: 0, y: 2.5, z: 7.5}
   m_LocalScale: {x: 5, y: 0.1, z: 5}
   m_Children: []
   m_Father: {fileID: 355469330705013789}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 355469331544028450}
   m_Layer: 0
   m_Name: Bar1
-  m_TagString: Untagged
+  m_TagString: CourseBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,8 +169,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355469331544028460}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.65, y: 2.95, z: -5}
-  m_LocalScale: {x: 0.1, y: 10, z: 0.1}
+  m_LocalPosition: {x: -0.65, y: 2.95, z: -4.4}
+  m_LocalScale: {x: 0.1, y: 9.4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 355469330705013789}
   m_RootOrder: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 355469332086563022}
   m_Layer: 0
   m_Name: Bar2
-  m_TagString: Untagged
+  m_TagString: CourseBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,8 +262,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355469332086563016}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.65, y: 2.95, z: -5}
-  m_LocalScale: {x: 0.099999994, y: 10, z: 0.10000005}
+  m_LocalPosition: {x: 0.65, y: 2.95, z: -4.4}
+  m_LocalScale: {x: 0.099999994, y: 9.4, z: 0.10000005}
   m_Children: []
   m_Father: {fileID: 355469330705013789}
   m_RootOrder: 1

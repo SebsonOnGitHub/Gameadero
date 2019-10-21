@@ -24,7 +24,7 @@ public class PlayerBall : Player
             beforeSpitTroca = trocaCollected;
             rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
-            Vector3 canOffset = new Vector3(0, 0, (transform.localScale.z * 2));
+            Vector3 canOffset = FindObjectOfType<MainCamera>().forwardVec * (transform.localScale.z * 2);
             spitCan = Instantiate<Can>(canPrefab, transform.position + canOffset, canPrefab.transform.rotation);
 
             PlayerController.currState = PlayerController.State.FILLING_CAN;
@@ -52,7 +52,7 @@ public class PlayerBall : Player
         SetSize();
         spitCan.SetSize(spitSize);
         spitCan = null;
-        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         PlayerController.currState = PlayerController.State.NONE;
     }
@@ -94,7 +94,7 @@ public class PlayerBall : Player
             PlayerController.currState = PlayerController.State.ADJUSTING_BOWL;
         }
         else {
-            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
             PlayerController.currState = PlayerController.State.NONE;
         }
     }
@@ -107,7 +107,7 @@ public class PlayerBall : Player
             bowl.SetFullness(beforeSpitBowlFullness + spitSize);
         }
 
-        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         PlayerController.currState = PlayerController.State.NONE;
     }
 }

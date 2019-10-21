@@ -7,29 +7,21 @@ public class Can : Collectable
     private float size;
     private float mass;
     private Vector3 smallestSize;
+    private bool collecting;
 
     public override void Init() {
         base.Init();
         size = 1;
         mass = 1000;
         smallestSize = gameObject.transform.localScale;
-    }
-
-    public void OnCollisionEnter(Collision collision) {
-        PlayerBall pBall = collision.collider.GetComponent<PlayerBall>();
-        if (pBall && PlayerController.currState != PlayerController.State.FILLING_CAN) {
-            audioObject.Collect(this);
-            pBall.CollectCan(size);
-            Destroy(gameObject);
-        }
+        collecting = false;
     }
 
     public void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("DeathPlane") && PlayerController.currState != PlayerController.State.FILLING_CAN) {
-            PlayerBall pBall = FindObjectOfType<PlayerBall>();
+        if (!collecting && (other.CompareTag("PlayerBall") || other.CompareTag("DeathPlane")) && PlayerController.currState != PlayerController.State.FILLING_CAN) {
+            collecting = true;
             audioObject.Collect(this);
-            pBall.CollectCan(size);
-            pBall.SetSize();
+            FindObjectOfType<PlayerBall>().CollectCan(size);
             FindObjectOfType<PlayerMan>().SetSize();
 
             Destroy(gameObject);

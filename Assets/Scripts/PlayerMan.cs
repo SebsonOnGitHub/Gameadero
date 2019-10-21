@@ -9,16 +9,25 @@ public class PlayerMan : Player
 
     private GameObject umbrella;
 
-    new public void Update() {
-        isGrounded = IsGrounded();
+    public override void UpdatingPlayer() {
+        base.UpdatingPlayer();
         if (umbrella && rb.velocity.y <= 0) {
             rb.AddForce(new Vector3(0, (rb.mass * 0.1f) * umbrellaFloat, 0));
         }
     }
 
-    public void Jump() {
-        if (isGrounded) {
-            rb.AddForce(new Vector3(0, 2, 0), ForceMode.Impulse);
+    private void FixedUpdate() {
+        if (isSwimming) {
+            rb.AddForce(new Vector3(0, 5, 0));
+        }
+    }
+
+    public void Jump(bool swim) {
+        if (isSwimming && swim) {
+            rb.AddForce(new Vector3(0, 4, 0));
+        }
+        else if (isGrounded && !swim) {
+            rb.AddForce(new Vector3(0, 2.5f, 0), ForceMode.Impulse);
         }
     }
 

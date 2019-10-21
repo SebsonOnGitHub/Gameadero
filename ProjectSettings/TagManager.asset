@@ -8,6 +8,7 @@ TagManager:
   - DeathPlane
   - PlayerMan
   - PlayerBall
+  - CourseBar
   layers:
   - Default
   - TransparentFX
