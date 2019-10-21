@@ -8,7 +8,7 @@ public class PlayerBall : Player
     public Can canPrefab;
 
     private float spitSize = 0;
-    private float spitSpeed = 0.05f;
+    private float spitSpeed = 0.03f;
     private Can spitCan;
     private float beforeSpitTroca;
     private float beforeSpitBowlFullness;
@@ -40,6 +40,10 @@ public class PlayerBall : Player
             trocaCollected -= spitSpeed;
             SetSize();
             spitCan.SetSize(spitSize);
+
+            if (Mathf.Ceil(spitSize) - spitSize < spitSpeed) {
+                //Debug.Log(Mathf.Floor(spitCan.size) + 1); Make the can flash instead
+            }
         }
         else {
             PlayerController.currState = PlayerController.State.ADJUSTING_CAN;
@@ -47,7 +51,7 @@ public class PlayerBall : Player
     }
 
     public void AdjustCan() {
-        spitSize = Mathf.Ceil(spitSize);
+        spitSize = Mathf.Floor(spitSize + spitSpeed);
         trocaCollected = beforeSpitTroca - spitSize;
         SetSize();
         spitCan.SetSize(spitSize);

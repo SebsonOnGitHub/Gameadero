@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3381924621965047824}
   - component: {fileID: 632597886636409800}
-  - component: {fileID: 5939951649501968433}
+  - component: {fileID: 8860652612660503644}
   - component: {fileID: 8515074769513656475}
   - component: {fileID: 4152525615257857651}
   m_Layer: 0
@@ -132,7 +132,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &5939951649501968433
+--- !u!64 &8860652612660503644
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioObject: {fileID: 0}
+  trocaText: {fileID: 0}
 --- !u!136 &4152525615257857651
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ CapsuleCollider:
   m_Radius: 70
   m_Height: 250
   m_Direction: 1
-  m_Center: {x: 0, y: 95, z: 0}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &3906739506510242246
 GameObject:
   m_ObjectHideFlags: 0

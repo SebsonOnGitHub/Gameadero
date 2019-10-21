@@ -52,7 +52,7 @@ public class GameCanvas : MonoBehaviour
     public void Update(){
         int maxCaps = Player.capsCollected + FindObjectOfType<GameMaster>().capsInWorld;
 
-        trocaList[10].text = Mathf.Floor(Player.trocaCollected).ToString();
+        trocaList[10].text = Mathf.Ceil(Player.trocaCollected).ToString();
         capList[capList.Count - 3].text = Player.capsCollected.ToString();
         capList[capList.Count - 1].text = maxCaps.ToString();
 

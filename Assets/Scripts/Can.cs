@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Can : Collectable
 {
-    private float size;
+    public float size;
+    
     private float mass;
     private Vector3 smallestSize;
     private bool collecting;
@@ -29,6 +30,10 @@ public class Can : Collectable
     }
 
     public void SetSize(float canSize) {
+        if (canSize == 0) {
+            Destroy(gameObject);
+        }
+
         size = canSize;
         Vector3 newSize = size * smallestSize;
         if (size < 1) {
