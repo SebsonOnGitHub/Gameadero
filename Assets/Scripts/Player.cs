@@ -12,15 +12,15 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public float growthScalar;
     public float weightScalar;
-    public bool respawning;
+    public bool isRespawning;
     public float currSpeed;
     public List<int> standingOn = new List<int>();
 
     protected float waterSpeed;
     protected float currRotateSpeed;
     protected Vector3 respawnPos;
-    protected bool isGrounded = false;
-    protected bool isSwimming = false;
+    protected bool isGrounded;
+    protected bool isSwimming;
     protected List<int> swimmingIn = new List<int>();
     protected List<int> onCourseBars = new List<int>();
 
@@ -34,7 +34,9 @@ public class Player : MonoBehaviour
 
     public virtual void Init() {
         rb = GetComponent<Rigidbody>();
-        respawning = false;
+        isRespawning = false;
+        isGrounded = false;
+        isSwimming = false;
         trocaCollected = 0;
         capsCollected = 0;
         smallestSize = transform.localScale;
@@ -52,19 +54,19 @@ public class Player : MonoBehaviour
     }
 
     public virtual void UpdatingPlayer() {
-        if (FindObjectOfType<MainCamera>().InPlace()) {
-            respawning = false;
-        }
+        isRespawning = !FindObjectOfType<MainCamera>().InPlace();
+        isGrounded = standingOn.Count > 0;
+        isSwimming = swimmingIn.Count > 0;
 
         if (Mathf.Abs(changeNeeded) > 0.001f) {
             currentChange += changeSpeed * Mathf.Sign(changeNeeded);
             changeNeeded -= changeSpeed * Mathf.Sign(changeNeeded);
-            
         }
         else {
             currentChange = trocaCollected * 0.5f;
             changeNeeded = 0;
         }
+
         transform.localScale = smallestSize + smallestSize * currentChange * growthScalar;
         rb.mass = smallestMass + smallestMass * currentChange * weightScalar;
 
@@ -75,21 +77,7 @@ public class Player : MonoBehaviour
             currSpeed = 10;
         }
 
-        if (swimmingIn.Count > 0) {
-            isSwimming = true;
-        }
-        else {
-            isSwimming = false;
-        }
-
-        if (standingOn.Count > 0) {
-            isGrounded = true;
-        }
-        else {
-            isGrounded = false;
-        }
-
-        if (respawning) {
+        if (isRespawning) {
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else if (rb.constraints == RigidbodyConstraints.FreezeAll) {
@@ -137,7 +125,7 @@ public class Player : MonoBehaviour
         }
 
         if (other.CompareTag("DeathPlane")) {
-            respawning = true;
+            isRespawning = true;
             transform.position = respawnPos;
             rb.velocity = Vector3.zero;
         }
