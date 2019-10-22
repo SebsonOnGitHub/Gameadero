@@ -10,6 +10,7 @@ public class Scale : MonoBehaviour
 
     private bool leftDown;
     private bool rightDown;
+    private bool completed;
 
     public void Start() {
         Init();
@@ -18,6 +19,7 @@ public class Scale : MonoBehaviour
     public void Init() {
         leftDown = false;
         rightDown = false;
+        completed = false;
     }
 
     public void OnTriggerEnter(Collider collider) {
@@ -28,7 +30,11 @@ public class Scale : MonoBehaviour
         else if (collider.gameObject == rightTrigger && !rightDown) {
             rightDown = true;
             leftDown = false;
-            SpawnObject(capPrefab, new Vector3(-43, 3, -4), capPrefab.transform.rotation, transform);
+            if (!completed) {
+                SpawnObject(capPrefab, new Vector3(-43, 3, -4), capPrefab.transform.rotation, transform);
+                completed = true;
+            }
+
         }
     }
 
