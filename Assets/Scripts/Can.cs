@@ -46,7 +46,7 @@ public class Can : Collectable
             PlayerController.currState != PlayerController.State.FILLING_CAN && currentChange == (int)currentChange) {
 
             collecting = true;
-            audioObject.Collect(this);
+            audioObject.Collect(collectType);
             FindObjectOfType<PlayerBall>().CollectCan(size);
 
             Destroy(gameObject);

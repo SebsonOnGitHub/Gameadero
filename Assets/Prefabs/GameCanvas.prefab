@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3579165321320517279}
   - component: {fileID: 3579165321320517248}
   m_Layer: 5
-  m_Name: Caplevel
+  m_Name: Collectlevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trocaText: {fileID: 3579165322020668104}
-  capText: {fileID: 3579165321320517248}
+  collectText: {fileID: 3579165321320517248}
   jumpText: {fileID: 3739643872140523721}
   moveText: {fileID: 4702992727343048415}
   actionText: {fileID: 7630133424280827533}

@@ -141,5 +141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canAudio: {fileID: 8300000, guid: a713902ffc4fcad45b17ac82c5fcfd47, type: 3}
-  capAudio: {fileID: 8300000, guid: a713902ffc4fcad45b17ac82c5fcfd47, type: 3}
+  orangeAudio: {fileID: 8300000, guid: 65d239a7cc980674aba7c2f086482232, type: 3}
+  appleAudio: {fileID: 8300000, guid: a4f0dc8e52d1a6e4d89fe761a1562a46, type: 3}
+  sugarAudio: {fileID: 8300000, guid: 2ec72a80ca17af6468159fb4f408dfa5, type: 3}
+  waterAudio: {fileID: 8300000, guid: b0d2ff3e842af5340a6342c3fec9028e, type: 3}
+  loveAudio: {fileID: 8300000, guid: 1b2523baa4b684d48a69f421efbbb1e1, type: 3}
   audioSource: {fileID: 9086914920702037877}

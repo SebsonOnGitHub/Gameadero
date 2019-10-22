@@ -6,8 +6,14 @@ public class PlayerMan : Player
 {
     public GameObject umbrellaPrefab;
     public float umbrellaFloat;
+    public List<Collectable.CollectType> ingredientsCollected;
 
     private GameObject umbrella;
+
+    public override void Init() {
+        base.Init();
+        ingredientsCollected = new List<Collectable.CollectType>();
+    }
 
     public override void UpdatingPlayer() {
         base.UpdatingPlayer();
@@ -42,8 +48,11 @@ public class PlayerMan : Player
         }
     }
 
-    public void CollectCap() {
-        FindObjectOfType<GameMaster>().capsInWorld--;
-        capsCollected += 1;
+    public void CollectIngredient(Collectable.CollectType ingredient) {
+        FindObjectOfType<GameMaster>().collectInWorld--;
+        if (!ingredientsCollected.Contains(ingredient)) {
+            ingredientsCollected.Add(ingredient);
+            mainCollected = ingredientsCollected.Count;
+        }
     }
 }

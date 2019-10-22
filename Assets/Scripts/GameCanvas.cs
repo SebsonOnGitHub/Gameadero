@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class GameCanvas : MonoBehaviour
 {
     public Text trocaText;
-    public Text capText;
+    public Text collectText;
     public Text jumpText;
     public Text moveText;
     public Text actionText;
     public Text switchText;
 
     private List<Text> trocaList;
-    private List<Text> capList;
+    private List<Text> collectList;
     private List<Text> actionList;
     private List<Text> switchList;
     private float letterDist = 0.88f;
@@ -25,7 +25,7 @@ public class GameCanvas : MonoBehaviour
 
     public void Init() {
         trocaText.text = "";
-        capText.text = "";
+        collectText.text = "";
 
         jumpText.text = "";
         moveText.text = "";
@@ -34,7 +34,7 @@ public class GameCanvas : MonoBehaviour
         switchText.text = "";
 
         trocaList = PrintLeftToRight(trocaText, "TROCADERO " + 0);
-        capList = PrintRightToLeft(capText, "BOTTLE CAPS " + 0 + "/" + 0);
+        collectList = PrintRightToLeft(collectText, "INGREDIENTS " + 0 + "/" + 0);
 
         PrintLeftToRight(jumpText, "JUMP: " + PlayerController.keyJump.ToString().ToUpper());
         PrintLeftToRight(moveText, "MOVE: " + PlayerController.keyUp.ToString() + PlayerController.keyLeft.ToString() + PlayerController.keyDown.ToString() + PlayerController.keyRight.ToString());
@@ -50,11 +50,11 @@ public class GameCanvas : MonoBehaviour
     }
 
     public void Update(){
-        int maxCaps = Player.capsCollected + FindObjectOfType<GameMaster>().capsInWorld;
+        int maxCollect = Player.mainCollected + FindObjectOfType<GameMaster>().collectInWorld;
 
         trocaList[10].text = Mathf.Ceil(Player.trocaCollected).ToString();
-        capList[capList.Count - 3].text = Player.capsCollected.ToString();
-        capList[capList.Count - 1].text = maxCaps.ToString();
+        collectList[collectList.Count - 3].text = Player.mainCollected.ToString();
+        collectList[collectList.Count - 1].text = maxCollect.ToString();
 
         if (FindObjectOfType<GameMaster>().currPlayer.GetComponent<PlayerMan>()) {
             for (int i = 0; i < "GLIDE".Length; i++) {

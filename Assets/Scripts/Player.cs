@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static int trocaCollected;
-    public static int capsCollected;
+    public static int mainCollected;
     public static float changeNeeded;
     public float changeSpeed;
     public float landSpeed;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         isGrounded = false;
         isSwimming = false;
         trocaCollected = 0;
-        capsCollected = 0;
+        mainCollected = 0;
         smallestSize = transform.localScale;
         smallestMass = rb.mass;
         currSpeed = landSpeed;

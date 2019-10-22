@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Scale : MonoBehaviour
 {
-    public GameObject capPrefab;
+    public GameObject collectPrefab;
+    public GameObject ingredientPrefab;
     public GameObject leftTrigger;
     public GameObject rightTrigger;
 
@@ -31,7 +32,7 @@ public class Scale : MonoBehaviour
             rightDown = true;
             leftDown = false;
             if (!completed) {
-                SpawnObject(capPrefab, new Vector3(-43, 3, -4), capPrefab.transform.rotation, transform);
+                SpawnObject(collectPrefab, new Vector3(-43, 3, -5), collectPrefab.transform.rotation, transform);
                 completed = true;
             }
 
@@ -39,6 +40,8 @@ public class Scale : MonoBehaviour
     }
 
     public void SpawnObject(GameObject Object, Vector3 position, Quaternion rotation, Transform parent) {
-        Instantiate(Object, position, rotation, parent);
+        GameObject tempIngr = Instantiate(Object, position, rotation, parent);
+        tempIngr.GetComponent<Ingredient>().ingredientPrefab = ingredientPrefab;
+        tempIngr.GetComponent<Ingredient>().collectType = Collectable.CollectType.APPLE;
     }
 }

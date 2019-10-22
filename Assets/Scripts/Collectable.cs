@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
+    public enum CollectType { NONE, CAN, ORANGE, APPLE, SUGAR, WATER, LOVE };
+    public CollectType collectType;
     public AudioObject audioObject;
 
     public void Start() {

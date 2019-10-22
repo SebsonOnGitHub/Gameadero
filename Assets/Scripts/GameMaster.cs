@@ -6,7 +6,7 @@ public class GameMaster : MonoBehaviour
 {
     public Player currPlayer;
     public Player secondPlayer;
-    public int capsInWorld;
+    public int collectInWorld;
 
     public void Start() {
         Init();
@@ -15,6 +15,7 @@ public class GameMaster : MonoBehaviour
     public void Init() {
         Physics.gravity = new Vector3(0, -23F, 0);
         secondPlayer.rb.isKinematic = true;
+        collectInWorld = 5;
     }
 
     public void SwitchMode() {

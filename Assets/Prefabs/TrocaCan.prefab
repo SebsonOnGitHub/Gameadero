@@ -158,8 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b730f5936bcff14db7e9a908e354642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectType: 1
   audioObject: {fileID: 0}
-  trocaText: {fileID: 0}
+  size: 0
+  currentChange: 0
+  changeNeeded: 0
 --- !u!136 &4152525615257857651
 CapsuleCollider:
   m_ObjectHideFlags: 0

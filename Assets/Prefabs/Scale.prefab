@@ -557,7 +557,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402049fc0066ebb4ab3a9db9e893cf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capPrefab: {fileID: 0}
+  collectPrefab: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
+    type: 3}
+  ingredientPrefab: {fileID: 7008778463790541391, guid: ea2837074174ae94980a6d1ee60c1912,
+    type: 3}
   leftTrigger: {fileID: 4057306887083406872}
   rightTrigger: {fileID: 3899548071880152860}
 --- !u!1 &4057306887975311006
