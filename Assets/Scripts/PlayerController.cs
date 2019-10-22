@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum State { NONE, SWITCHING, SWIMMING, FLOATING, GLIDING, INIT_BOWL, FILLING_BOWL, ADJUSTING_BOWL, INIT_CAN, FILLING_CAN, ADJUSTING_CAN };
+    public enum State { NONE, SWITCHING, GLIDING, INIT_BOWL, FILLING_BOWL, INIT_CAN, FILLING_CAN };
     public static State currState;
 
     public static KeyCode keyUp = KeyCode.W;
@@ -46,18 +46,11 @@ public class PlayerController : MonoBehaviour
                 nearbyBowl = gameMaster.currPlayer.GetComponent<PlayerBall>().BowlNearby();
                 gameMaster.currPlayer.GetComponent<PlayerBall>().FillBowl(nearbyBowl);
                 break;
-            case State.ADJUSTING_BOWL:
-                nearbyBowl = gameMaster.currPlayer.GetComponent<PlayerBall>().BowlNearby();
-                gameMaster.currPlayer.GetComponent<PlayerBall>().AdjustBowl(nearbyBowl);
-                break;
             case State.INIT_CAN:
                 gameMaster.currPlayer.GetComponent<PlayerBall>().InitCan();
                 break;
             case State.FILLING_CAN:
                 gameMaster.currPlayer.GetComponent<PlayerBall>().FillCan();
-                break;
-            case State.ADJUSTING_CAN:
-                gameMaster.currPlayer.GetComponent<PlayerBall>().AdjustCan();
                 break;
             default:
                 Debug.Log("PlayerController is not in a recognizable state");

@@ -136,10 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd24af322910144094e4dfaf0a5e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeSpeed: 0
   landSpeed: 2
   rb: {fileID: 106226097676039031}
-  growthScalar: 0.2
-  weightScalar: 0.02
+  growthScalar: 0.8
+  weightScalar: 0.1
   respawning: 0
   currSpeed: 0
   standingOn: 

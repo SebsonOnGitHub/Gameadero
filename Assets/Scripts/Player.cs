@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static float trocaCollected;
+    public static int trocaCollected;
     public static int capsCollected;
+    public static float changeNeeded;
+    public float changeSpeed;
     public float landSpeed;
     public Rigidbody rb;
     public float growthScalar;
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
 
     private Vector3 smallestSize;
     private float smallestMass;
-
+    private float currentChange;
 
     void Start() {
         Init();
@@ -35,11 +37,14 @@ public class Player : MonoBehaviour
         respawning = false;
         trocaCollected = 0;
         capsCollected = 0;
-        smallestSize = gameObject.transform.localScale;
+        smallestSize = transform.localScale;
         smallestMass = rb.mass;
         currSpeed = landSpeed;
         waterSpeed = 0.6f * landSpeed;
         currRotateSpeed = 1.6f;
+        changeNeeded = 0;
+        changeSpeed = 0.02f;
+        currentChange = 0;
     }
 
     public void Update() {
@@ -50,6 +55,18 @@ public class Player : MonoBehaviour
         if (FindObjectOfType<MainCamera>().InPlace()) {
             respawning = false;
         }
+
+        if (Mathf.Abs(changeNeeded) > 0.001f) {
+            currentChange += changeSpeed * Mathf.Sign(changeNeeded);
+            changeNeeded -= changeSpeed * Mathf.Sign(changeNeeded);
+            
+        }
+        else {
+            currentChange = trocaCollected * 0.5f;
+            changeNeeded = 0;
+        }
+        transform.localScale = smallestSize + smallestSize * currentChange * growthScalar;
+        rb.mass = smallestMass + smallestMass * currentChange * weightScalar;
 
         if (onCourseBars.Count < 2 && GetComponent<PlayerBall>()) {
             currSpeed = landSpeed;
@@ -166,9 +183,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void SetSize() {
-        float newSize = trocaCollected * growthScalar;
-        gameObject.transform.localScale = new Vector3(newSize, newSize, newSize) + smallestSize;
-        rb.mass = (trocaCollected * weightScalar) + smallestMass;
+    public static void ChangeSize(int sizeChange) {
+        changeNeeded += sizeChange;
     }
 }

@@ -7,25 +7,22 @@ public class PlayerBall : Player
     public float bowlReachDist;
     public Can canPrefab;
 
-    private float spitSize = 0;
-    private float spitSpeed = 0.03f;
     private Can spitCan;
-    private float beforeSpitTroca;
-    private float beforeSpitBowlFullness;
+    private int spitSize = 1;
+    private int firstTime;
 
-    public void CollectCan(float size) {
+    public void CollectCan(int size) {
         trocaCollected += size;
-        SetSize();
+        ChangeSize(size);
     }
 
     public void InitCan() {
-        if (trocaCollected > 0) {
-            spitSize = 0;
-            beforeSpitTroca = trocaCollected;
+        if (Player.changeNeeded == 0 && trocaCollected > 0) {
             rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
             Vector3 canOffset = FindObjectOfType<MainCamera>().forwardVec * (transform.localScale.z * 2);
             spitCan = Instantiate<Can>(canPrefab, transform.position + canOffset, canPrefab.transform.rotation);
+            firstTime = 1;
 
             PlayerController.currState = PlayerController.State.FILLING_CAN;
         }
@@ -35,30 +32,22 @@ public class PlayerBall : Player
     }
 
     public void FillCan() {
-        if (Input.GetKey(PlayerController.keyAction) && trocaCollected >= spitSpeed) {
-            spitSize += spitSpeed;
-            trocaCollected -= spitSpeed;
-            SetSize();
-            spitCan.SetSize(spitSize);
+        if (Player.changeNeeded == 0) {
+            if (Input.GetKey(PlayerController.keyAction) && trocaCollected > 0) {
+                trocaCollected -= spitSize;
+                ChangeSize(-spitSize);
+                spitCan.ChangeSize(spitSize - firstTime);
 
-            if (Mathf.Ceil(spitSize) - spitSize < spitSpeed) {
-                //Debug.Log(Mathf.Floor(spitCan.size) + 1); Make the can flash instead
+                if (firstTime == 1) {
+                    firstTime = 0;
+                }
+            }
+            else {
+                spitCan = null;
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                PlayerController.currState = PlayerController.State.NONE;
             }
         }
-        else {
-            PlayerController.currState = PlayerController.State.ADJUSTING_CAN;
-        }
-    }
-
-    public void AdjustCan() {
-        spitSize = Mathf.Floor(spitSize + spitSpeed);
-        trocaCollected = beforeSpitTroca - spitSize;
-        SetSize();
-        spitCan.SetSize(spitSize);
-        spitCan = null;
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
-
-        PlayerController.currState = PlayerController.State.NONE;
     }
 
     public Bowl BowlNearby() {
@@ -74,10 +63,7 @@ public class PlayerBall : Player
     }
 
     public void InitBowl(Bowl bowl) {
-        if (trocaCollected > 0) {
-            spitSize = 0;
-            beforeSpitBowlFullness = bowl.currFullness;
-            beforeSpitTroca = trocaCollected;
+        if (Player.changeNeeded == 0 && trocaCollected > 0) {
             rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
             PlayerController.currState = PlayerController.State.FILLING_BOWL;
@@ -88,30 +74,16 @@ public class PlayerBall : Player
     }
 
     public void FillBowl(Bowl bowl) {
-        if (Input.GetKey(PlayerController.keyAction) && bowl && trocaCollected >= spitSpeed && spitSize + spitSpeed <= bowl.maxFullness) {
-            spitSize += spitSpeed;
-            trocaCollected -= spitSpeed;
-            SetSize();
-            bowl.SetFullness(beforeSpitBowlFullness + spitSize);
+        if (Player.changeNeeded == 0) {
+            if (Input.GetKey(PlayerController.keyAction) && bowl && trocaCollected > 0) {
+                trocaCollected -= spitSize;
+                ChangeSize(-spitSize);
+                bowl.ChangeFullness(spitSize);
+            }
+            else {
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                PlayerController.currState = PlayerController.State.NONE;
+            }
         }
-        else if (bowl) {
-            PlayerController.currState = PlayerController.State.ADJUSTING_BOWL;
-        }
-        else {
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-            PlayerController.currState = PlayerController.State.NONE;
-        }
-    }
-
-    public void AdjustBowl(Bowl bowl) {
-        if (bowl.percentFullness < 1) {
-            spitSize = Mathf.Ceil(spitSize);
-            trocaCollected = beforeSpitTroca - spitSize;
-            SetSize();
-            bowl.SetFullness(beforeSpitBowlFullness + spitSize);
-        }
-
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        PlayerController.currState = PlayerController.State.NONE;
     }
 }

@@ -29,7 +29,6 @@ public class GameMaster : MonoBehaviour
         currPlayer = secondPlayer;
         secondPlayer = tempPlayer;
 
-        currPlayer.SetSize();
         currPlayer.rb.isKinematic = false;
         secondPlayer.rb.isKinematic = true;
 

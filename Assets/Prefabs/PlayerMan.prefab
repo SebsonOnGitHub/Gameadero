@@ -117,7 +117,7 @@ Rigidbody:
   m_GameObject: {fileID: 546360774519558900}
   serializedVersion: 2
   m_Mass: 0.2
-  m_Drag: 1
+  m_Drag: 2
   m_AngularDrag: 0.02
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -136,13 +136,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20a778d55b56be44a396f7c6850f97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeSpeed: 0
   landSpeed: 2.6
   rb: {fileID: 546360774519558897}
-  growthScalar: 0.2
-  weightScalar: 0.02
+  growthScalar: 0.8
+  weightScalar: 0.1
   respawning: 0
   currSpeed: 0
-  isGrounded: 0
+  standingOn: 
   umbrellaPrefab: {fileID: 5758374911375331075, guid: b0a990f1ea0703b4a80d2e43debbb9c1,
     type: 3}
   umbrellaFloat: 150
