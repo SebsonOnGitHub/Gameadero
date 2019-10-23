@@ -9,9 +9,11 @@ public class PlayerMan : Player
     public List<Collectable.CollectType> ingredientsCollected;
 
     private GameObject umbrella;
+    private float glideAngle = 0.2f;
 
     public override void Init() {
         base.Init();
+        Random.InitState(0);
         ingredientsCollected = new List<Collectable.CollectType>();
     }
 
@@ -39,12 +41,25 @@ public class PlayerMan : Player
 
     public void Glide() {
         if (!umbrella && !isGrounded) {
-            Vector3 umbrellaPos = transform.position + new Vector3(0.4f, 0.4f, 0);
+            Vector3 umbrellaPos = transform.position + new Vector3(0, 0.4f, 0);
             umbrella = Instantiate(umbrellaPrefab, umbrellaPos, umbrellaPrefab.transform.rotation, transform);
+            int rnd;
+            do {
+                rnd = Random.Range(-1, 1);
+            } while (rnd == 0) ;
+            glideAngle *= rnd;
         }
         else if (!Input.GetKey(PlayerController.keyAction) || isGrounded) {
             Destroy(umbrella);
+            transform.rotation = FindObjectOfType<MainCamera>().forwardKeeper.transform.rotation;
             PlayerController.currState = PlayerController.State.NONE;
+        }
+        else {
+            if (transform.rotation.z > 0.07 || transform.rotation.z < -0.07) {
+                glideAngle *= -1;
+            }
+            Vector3 rotPoint = transform.position + new Vector3(0, transform.position.y, 0);
+            transform.RotateAround(rotPoint, FindObjectOfType<MainCamera>().forwardVec, glideAngle);
         }
     }
 
