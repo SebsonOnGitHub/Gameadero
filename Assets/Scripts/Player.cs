@@ -101,8 +101,8 @@ public class Player : MonoBehaviour
     }
 
     public void Respawning(Collision collision) {
-        if (collision.collider.CompareTag("Respawn")) {
-            respawnPos = transform.position;
+        if (collision.collider.CompareTag("Respawn") && transform.position.y > 0) {
+            respawnPos = transform.position + new Vector3(0, 1, 0);
         }
     }
 
