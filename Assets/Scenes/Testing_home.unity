@@ -1152,6 +1152,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 336579898}
     m_Modifications:
+    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
+        type: 3}
+      propertyPath: m_Name
+      value: Sugar Ingredient
+      objectReference: {fileID: 0}
     - target: {fileID: -4024304421505957467, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: collectType
@@ -1168,11 +1173,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2855157377583281024, guid: d952bd34ed527de4da0d720c88e97088,
         type: 3}
-    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
-        type: 3}
-      propertyPath: m_Name
-      value: Sugar Ingredient
-      objectReference: {fileID: 0}
     - target: {fileID: 9103360044476103704, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1186,7 +1186,7 @@ PrefabInstance:
     - target: {fileID: 9103360044476103704, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.37
+      value: -17.77
       objectReference: {fileID: 0}
     - target: {fileID: 9103360044476103704, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
@@ -2209,6 +2209,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 268398047}
     m_Modifications:
+    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
+        type: 3}
+      propertyPath: m_Name
+      value: Ingredient
+      objectReference: {fileID: 0}
     - target: {fileID: -4024304421505957467, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: collectType
@@ -2225,11 +2230,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8479626743168782569, guid: 497d2b351741bc040b81c32e3790a6fa,
         type: 3}
-    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
-        type: 3}
-      propertyPath: m_Name
-      value: Ingredient
-      objectReference: {fileID: 0}
     - target: {fileID: 9103360044476103704, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2826,7 +2826,7 @@ PrefabInstance:
     - target: {fileID: 546360774519558896, guid: b02f3d00c54f6064fb1b9e02e603cda4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.35
+      value: -36.47
       objectReference: {fileID: 0}
     - target: {fileID: 546360774519558896, guid: b02f3d00c54f6064fb1b9e02e603cda4,
         type: 3}
@@ -3217,6 +3217,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
+        type: 3}
+      propertyPath: m_Name
+      value: Love Ingredient
+      objectReference: {fileID: 0}
     - target: {fileID: -4024304421505957467, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: collectType
@@ -3233,11 +3238,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1228664204928857518, guid: 0441252a6a5f0a14284f29dd417f266c,
         type: 3}
-    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
-        type: 3}
-      propertyPath: m_Name
-      value: Love Ingredient
-      objectReference: {fileID: 0}
     - target: {fileID: 9103360044476103704, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3796,6 +3796,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 124356397}
     m_Modifications:
+    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
+        type: 3}
+      propertyPath: m_Name
+      value: Water Ingredient
+      objectReference: {fileID: 0}
     - target: {fileID: -4024304421505957467, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: collectType
@@ -3812,11 +3817,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8525389477186949852, guid: 25ce3761bf515ec47a472c259e17535c,
         type: 3}
-    - target: {fileID: 5772320486378821232, guid: 7afd45e847333fd4c8eb5e1264946e59,
-        type: 3}
-      propertyPath: m_Name
-      value: Water Ingredient
-      objectReference: {fileID: 0}
     - target: {fileID: 9103360044476103704, guid: 7afd45e847333fd4c8eb5e1264946e59,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -37,8 +37,8 @@ public class RollingCan : MonoBehaviour
         }
     }
 
-    public void SpawnAgain() {
-        transform.position = originalPosition;
+    public void SpawnAgain(int xPos) {
+        transform.position = new Vector3(originalPosition.x + xPos, originalPosition.y, originalPosition.z);
         transform.rotation = originalRotation;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         GetComponent<Rigidbody>().velocity = Vector3.zero;

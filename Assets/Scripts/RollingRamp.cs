@@ -11,17 +11,19 @@ public class RollingRamp : MonoBehaviour
     private List<RollingCan> cans = new List<RollingCan>();
     private int currCan = 0;
     private int maxCans = 4;
+    private List<int> randPos = new List<int>(new int[]{0, 2, 3});
 
     private void Update() {
         time += Time.deltaTime;
 
         if (time > delay) {
+            int randX = randPos[Random.Range(0, 3)];
+            Debug.Log(randX);
             if (cans.Count < maxCans) {
-                cans.Add(Instantiate(rollPrefab, transform.position + new Vector3(2, 10, 2), rollPrefab.transform.rotation, transform.parent));
-                //Make the 3 in xPos in the vector a random number between 0,2 and 3
+                cans.Add(Instantiate(rollPrefab, transform.position + new Vector3(0, 11, 3), rollPrefab.transform.rotation, transform.parent));
             }
             else {
-                cans[currCan].SpawnAgain();
+                cans[currCan].SpawnAgain(randX);
                 currCan = (currCan + 1) % maxCans;
             }
             time = 0;
